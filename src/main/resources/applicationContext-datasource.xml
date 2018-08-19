@@ -88,12 +88,7 @@
         <property name="dataSource" ref="dataSource"/>
         <property name="rollbackOnCommitFailure" value="true"/>
     </bean>
-    <!-- 需要文件上传功能时，启用以下配置 -->
-    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <property name="maxInMemorySize">
-            <value>1638400</value>
-        </property>
-    </bean>
+
     <mvc:annotation-driven/>
 
 </beans>

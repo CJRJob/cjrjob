@@ -19,12 +19,11 @@
 
     <import resource="classpath:applicationContext-datasource.xml"/>
 
-     Spring MVC拦截器
-    <mvc:interceptors>
-        <mvc:interceptor>
-            <mvc:mapping path="/user/*"/>
-            <!--<mvc:exclude-mapping path="/manage/user/login.do"/>-->
-            <bean class="com.cjrjob.handler.AuthorityIntercepter"/>
-        </mvc:interceptor>
-    </mvc:interceptors>
+     <!--Spring MVC拦截器-->
+    <!--<mvc:interceptors>-->
+        <!--<mvc:interceptor>-->
+            <!--<mvc:mapping path="/user/*"/>-->
+            <!--<bean class="com.cjrjob.interpector.AuthorityIntercepter"/>-->
+        <!--</mvc:interceptor>-->
+    <!--</mvc:interceptors>-->
 </beans>
