@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cjrjob.dao.CityMapper" >
+  <resultMap id="BaseResultMap" type="com.cjrjob.pojo.City" >
+    <constructor >
+      <idArg column="job_city_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="job_city_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="backup" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    job_city_id, job_city_name, backup
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from job_city
+    where job_city_id = #{jobCityId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from job_city
+    where job_city_id = #{jobCityId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cjrjob.pojo.City" >
+    insert into job_city (job_city_id, job_city_name, backup
+      )
+    values (#{jobCityId,jdbcType=INTEGER}, #{jobCityName,jdbcType=VARCHAR}, #{backup,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cjrjob.pojo.City" >
+    insert into job_city
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="jobCityId != null" >
+        job_city_id,
+      </if>
+      <if test="jobCityName != null" >
+        job_city_name,
+      </if>
+      <if test="backup != null" >
+        backup,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="jobCityId != null" >
+        #{jobCityId,jdbcType=INTEGER},
+      </if>
+      <if test="jobCityName != null" >
+        #{jobCityName,jdbcType=VARCHAR},
+      </if>
+      <if test="backup != null" >
+        #{backup,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cjrjob.pojo.City" >
+    update job_city
+    <set >
+      <if test="jobCityName != null" >
+        job_city_name = #{jobCityName,jdbcType=VARCHAR},
+      </if>
+      <if test="backup != null" >
+        backup = #{backup,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where job_city_id = #{jobCityId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cjrjob.pojo.City" >
+    update job_city
+    set job_city_name = #{jobCityName,jdbcType=VARCHAR},
+      backup = #{backup,jdbcType=VARCHAR}
+    where job_city_id = #{jobCityId,jdbcType=INTEGER}
+  </update>
+</mapper>

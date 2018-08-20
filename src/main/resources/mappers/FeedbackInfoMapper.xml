@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cjrjob.dao.FeedbackInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.cjrjob.pojo.FeedbackInfo" >
+    <constructor >
+      <idArg column="feedback_info_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="feedback_kind" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="contact" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="job_seeker_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="backup" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.cjrjob.pojo.FeedbackInfo" >
+    <constructor >
+      <idArg column="feedback_info_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="feedback_kind" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="contact" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="job_seeker_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="backup" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="feedback_content" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    feedback_info_id, feedback_kind, contact, create_time, job_seeker_id, backup
+  </sql>
+  <sql id="Blob_Column_List" >
+    feedback_content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from feedback_info
+    where feedback_info_id = #{feedbackInfoId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from feedback_info
+    where feedback_info_id = #{feedbackInfoId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cjrjob.pojo.FeedbackInfo" >
+    insert into feedback_info (feedback_info_id, feedback_kind, contact, 
+      create_time, job_seeker_id, backup, 
+      feedback_content)
+    values (#{feedbackInfoId,jdbcType=INTEGER}, #{feedbackKind,jdbcType=VARCHAR}, #{contact,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{jobSeekerId,jdbcType=INTEGER}, #{backup,jdbcType=VARCHAR}, 
+      #{feedbackContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cjrjob.pojo.FeedbackInfo" >
+    insert into feedback_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="feedbackInfoId != null" >
+        feedback_info_id,
+      </if>
+      <if test="feedbackKind != null" >
+        feedback_kind,
+      </if>
+      <if test="contact != null" >
+        contact,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="jobSeekerId != null" >
+        job_seeker_id,
+      </if>
+      <if test="backup != null" >
+        backup,
+      </if>
+      <if test="feedbackContent != null" >
+        feedback_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="feedbackInfoId != null" >
+        #{feedbackInfoId,jdbcType=INTEGER},
+      </if>
+      <if test="feedbackKind != null" >
+        #{feedbackKind,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null" >
+        #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jobSeekerId != null" >
+        #{jobSeekerId,jdbcType=INTEGER},
+      </if>
+      <if test="backup != null" >
+        #{backup,jdbcType=VARCHAR},
+      </if>
+      <if test="feedbackContent != null" >
+        #{feedbackContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cjrjob.pojo.FeedbackInfo" >
+    update feedback_info
+    <set >
+      <if test="feedbackKind != null" >
+        feedback_kind = #{feedbackKind,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null" >
+        contact = #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jobSeekerId != null" >
+        job_seeker_id = #{jobSeekerId,jdbcType=INTEGER},
+      </if>
+      <if test="backup != null" >
+        backup = #{backup,jdbcType=VARCHAR},
+      </if>
+      <if test="feedbackContent != null" >
+        feedback_content = #{feedbackContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where feedback_info_id = #{feedbackInfoId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.cjrjob.pojo.FeedbackInfo" >
+    update feedback_info
+    set feedback_kind = #{feedbackKind,jdbcType=VARCHAR},
+      contact = #{contact,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      job_seeker_id = #{jobSeekerId,jdbcType=INTEGER},
+      backup = #{backup,jdbcType=VARCHAR},
+      feedback_content = #{feedbackContent,jdbcType=LONGVARCHAR}
+    where feedback_info_id = #{feedbackInfoId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cjrjob.pojo.FeedbackInfo" >
+    update feedback_info
+    set feedback_kind = #{feedbackKind,jdbcType=VARCHAR},
+      contact = #{contact,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      job_seeker_id = #{jobSeekerId,jdbcType=INTEGER},
+      backup = #{backup,jdbcType=VARCHAR}
+    where feedback_info_id = #{feedbackInfoId,jdbcType=INTEGER}
+  </update>
+</mapper>
