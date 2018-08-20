@@ -5,12 +5,9 @@ public class City {
 
     private String jobCityName;
 
-    private String backup;
-
-    public City(Integer jobCityId, String jobCityName, String backup) {
+    public City(Integer jobCityId, String jobCityName) {
         this.jobCityId = jobCityId;
         this.jobCityName = jobCityName;
-        this.backup = backup;
     }
 
     public City() {
@@ -31,13 +28,5 @@ public class City {
 
     public void setJobCityName(String jobCityName) {
         this.jobCityName = jobCityName == null ? null : jobCityName.trim();
-    }
-
-    public String getBackup() {
-        return backup;
-    }
-
-    public void setBackup(String backup) {
-        this.backup = backup == null ? null : backup.trim();
     }
 }

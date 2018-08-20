@@ -34,9 +34,6 @@
       <arg column="job_seeker_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="head_img_URI" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="resume_document_URI" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="backup_1" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="backup_2" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="backup_3" jdbcType="VARCHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
@@ -44,7 +41,7 @@
     gender, location, work_experience, hope_city, email, job_kind, hope_money, seeker_status, 
     nation, marriage, household, graduation_time, QQ, expect_industry, seeker_job, start_time, 
     height, political, IDnumber, family_phone, address, job_seeker_id, head_img_URI, 
-    resume_document_URI, backup_1, backup_2, backup_3
+    resume_document_URI
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -67,8 +64,7 @@
       seeker_job, start_time, height, 
       political, IDnumber, family_phone, 
       address, job_seeker_id, head_img_URI, 
-      resume_document_URI, backup_1, backup_2, 
-      backup_3)
+      resume_document_URI)
     values (#{jobSeekerInfoId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, 
       #{highestEducation,jdbcType=VARCHAR}, #{hopeJob,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
       #{disabilityKind,jdbcType=VARCHAR}, #{gender,jdbcType=CHAR}, #{location,jdbcType=VARCHAR}, 
@@ -79,8 +75,7 @@
       #{seekerJob,jdbcType=VARCHAR}, #{startTime,jdbcType=DATE}, #{height,jdbcType=VARCHAR}, 
       #{political,jdbcType=VARCHAR}, #{idnumber,jdbcType=VARCHAR}, #{familyPhone,jdbcType=VARCHAR}, 
       #{address,jdbcType=VARCHAR}, #{jobSeekerId,jdbcType=INTEGER}, #{headImgUri,jdbcType=VARCHAR}, 
-      #{resumeDocumentUri,jdbcType=VARCHAR}, #{backup1,jdbcType=VARCHAR}, #{backup2,jdbcType=VARCHAR}, 
-      #{backup3,jdbcType=VARCHAR})
+      #{resumeDocumentUri,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.cjrjob.pojo.SeekerInfo" >
     insert into job_seeker_info
@@ -178,15 +173,6 @@
       <if test="resumeDocumentUri != null" >
         resume_document_URI,
       </if>
-      <if test="backup1 != null" >
-        backup_1,
-      </if>
-      <if test="backup2 != null" >
-        backup_2,
-      </if>
-      <if test="backup3 != null" >
-        backup_3,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="jobSeekerInfoId != null" >
@@ -281,15 +267,6 @@
       </if>
       <if test="resumeDocumentUri != null" >
         #{resumeDocumentUri,jdbcType=VARCHAR},
-      </if>
-      <if test="backup1 != null" >
-        #{backup1,jdbcType=VARCHAR},
-      </if>
-      <if test="backup2 != null" >
-        #{backup2,jdbcType=VARCHAR},
-      </if>
-      <if test="backup3 != null" >
-        #{backup3,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -386,15 +363,6 @@
       <if test="resumeDocumentUri != null" >
         resume_document_URI = #{resumeDocumentUri,jdbcType=VARCHAR},
       </if>
-      <if test="backup1 != null" >
-        backup_1 = #{backup1,jdbcType=VARCHAR},
-      </if>
-      <if test="backup2 != null" >
-        backup_2 = #{backup2,jdbcType=VARCHAR},
-      </if>
-      <if test="backup3 != null" >
-        backup_3 = #{backup3,jdbcType=VARCHAR},
-      </if>
     </set>
     where job_seeker_info_id = #{jobSeekerInfoId,jdbcType=INTEGER}
   </update>
@@ -429,10 +397,7 @@
       address = #{address,jdbcType=VARCHAR},
       job_seeker_id = #{jobSeekerId,jdbcType=INTEGER},
       head_img_URI = #{headImgUri,jdbcType=VARCHAR},
-      resume_document_URI = #{resumeDocumentUri,jdbcType=VARCHAR},
-      backup_1 = #{backup1,jdbcType=VARCHAR},
-      backup_2 = #{backup2,jdbcType=VARCHAR},
-      backup_3 = #{backup3,jdbcType=VARCHAR}
+      resume_document_URI = #{resumeDocumentUri,jdbcType=VARCHAR}
     where job_seeker_info_id = #{jobSeekerInfoId,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -7,11 +7,10 @@
       <arg column="img_URI" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="img_content" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="backup" jdbcType="VARCHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    banner_info_id, img_URI, img_content, create_time, backup
+    banner_info_id, img_URI, img_content, create_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -25,9 +24,9 @@
   </delete>
   <insert id="insert" parameterType="com.cjrjob.pojo.BannerInfo" >
     insert into banner_info (banner_info_id, img_URI, img_content, 
-      create_time, backup)
+      create_time)
     values (#{bannerInfoId,jdbcType=INTEGER}, #{imgUri,jdbcType=VARCHAR}, #{imgContent,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{backup,jdbcType=VARCHAR})
+      #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.cjrjob.pojo.BannerInfo" >
     insert into banner_info
@@ -44,9 +43,6 @@
       <if test="createTime != null" >
         create_time,
       </if>
-      <if test="backup != null" >
-        backup,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="bannerInfoId != null" >
@@ -60,9 +56,6 @@
       </if>
       <if test="createTime != null" >
         #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="backup != null" >
-        #{backup,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -78,9 +71,6 @@
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="backup != null" >
-        backup = #{backup,jdbcType=VARCHAR},
-      </if>
     </set>
     where banner_info_id = #{bannerInfoId,jdbcType=INTEGER}
   </update>
@@ -88,8 +78,7 @@
     update banner_info
     set img_URI = #{imgUri,jdbcType=VARCHAR},
       img_content = #{imgContent,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      backup = #{backup,jdbcType=VARCHAR}
+      create_time = #{createTime,jdbcType=TIMESTAMP}
     where banner_info_id = #{bannerInfoId,jdbcType=INTEGER}
   </update>
 </mapper>

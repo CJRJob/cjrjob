@@ -8,7 +8,6 @@
       <arg column="contact" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="job_seeker_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="backup" jdbcType="VARCHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.cjrjob.pojo.FeedbackInfo" >
@@ -18,12 +17,11 @@
       <arg column="contact" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="job_seeker_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="backup" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="feedback_content" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    feedback_info_id, feedback_kind, contact, create_time, job_seeker_id, backup
+    feedback_info_id, feedback_kind, contact, create_time, job_seeker_id
   </sql>
   <sql id="Blob_Column_List" >
     feedback_content
@@ -42,11 +40,11 @@
   </delete>
   <insert id="insert" parameterType="com.cjrjob.pojo.FeedbackInfo" >
     insert into feedback_info (feedback_info_id, feedback_kind, contact, 
-      create_time, job_seeker_id, backup, 
-      feedback_content)
+      create_time, job_seeker_id, feedback_content
+      )
     values (#{feedbackInfoId,jdbcType=INTEGER}, #{feedbackKind,jdbcType=VARCHAR}, #{contact,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{jobSeekerId,jdbcType=INTEGER}, #{backup,jdbcType=VARCHAR}, 
-      #{feedbackContent,jdbcType=LONGVARCHAR})
+      #{createTime,jdbcType=TIMESTAMP}, #{jobSeekerId,jdbcType=INTEGER}, #{feedbackContent,jdbcType=LONGVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.cjrjob.pojo.FeedbackInfo" >
     insert into feedback_info
@@ -65,9 +63,6 @@
       </if>
       <if test="jobSeekerId != null" >
         job_seeker_id,
-      </if>
-      <if test="backup != null" >
-        backup,
       </if>
       <if test="feedbackContent != null" >
         feedback_content,
@@ -89,9 +84,6 @@
       <if test="jobSeekerId != null" >
         #{jobSeekerId,jdbcType=INTEGER},
       </if>
-      <if test="backup != null" >
-        #{backup,jdbcType=VARCHAR},
-      </if>
       <if test="feedbackContent != null" >
         #{feedbackContent,jdbcType=LONGVARCHAR},
       </if>
@@ -112,9 +104,6 @@
       <if test="jobSeekerId != null" >
         job_seeker_id = #{jobSeekerId,jdbcType=INTEGER},
       </if>
-      <if test="backup != null" >
-        backup = #{backup,jdbcType=VARCHAR},
-      </if>
       <if test="feedbackContent != null" >
         feedback_content = #{feedbackContent,jdbcType=LONGVARCHAR},
       </if>
@@ -127,7 +116,6 @@
       contact = #{contact,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       job_seeker_id = #{jobSeekerId,jdbcType=INTEGER},
-      backup = #{backup,jdbcType=VARCHAR},
       feedback_content = #{feedbackContent,jdbcType=LONGVARCHAR}
     where feedback_info_id = #{feedbackInfoId,jdbcType=INTEGER}
   </update>
@@ -136,8 +124,7 @@
     set feedback_kind = #{feedbackKind,jdbcType=VARCHAR},
       contact = #{contact,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      job_seeker_id = #{jobSeekerId,jdbcType=INTEGER},
-      backup = #{backup,jdbcType=VARCHAR}
+      job_seeker_id = #{jobSeekerId,jdbcType=INTEGER}
     where feedback_info_id = #{feedbackInfoId,jdbcType=INTEGER}
   </update>
 </mapper>

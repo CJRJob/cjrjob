@@ -5,11 +5,10 @@
     <constructor >
       <idArg column="job_city_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="job_city_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="backup" jdbcType="VARCHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    job_city_id, job_city_name, backup
+    job_city_id, job_city_name
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -22,10 +21,8 @@
     where job_city_id = #{jobCityId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.cjrjob.pojo.City" >
-    insert into job_city (job_city_id, job_city_name, backup
-      )
-    values (#{jobCityId,jdbcType=INTEGER}, #{jobCityName,jdbcType=VARCHAR}, #{backup,jdbcType=VARCHAR}
-      )
+    insert into job_city (job_city_id, job_city_name)
+    values (#{jobCityId,jdbcType=INTEGER}, #{jobCityName,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.cjrjob.pojo.City" >
     insert into job_city
@@ -36,9 +33,6 @@
       <if test="jobCityName != null" >
         job_city_name,
       </if>
-      <if test="backup != null" >
-        backup,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="jobCityId != null" >
@@ -46,9 +40,6 @@
       </if>
       <if test="jobCityName != null" >
         #{jobCityName,jdbcType=VARCHAR},
-      </if>
-      <if test="backup != null" >
-        #{backup,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -58,16 +49,12 @@
       <if test="jobCityName != null" >
         job_city_name = #{jobCityName,jdbcType=VARCHAR},
       </if>
-      <if test="backup != null" >
-        backup = #{backup,jdbcType=VARCHAR},
-      </if>
     </set>
     where job_city_id = #{jobCityId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.cjrjob.pojo.City" >
     update job_city
-    set job_city_name = #{jobCityName,jdbcType=VARCHAR},
-      backup = #{backup,jdbcType=VARCHAR}
+    set job_city_name = #{jobCityName,jdbcType=VARCHAR}
     where job_city_id = #{jobCityId,jdbcType=INTEGER}
   </update>
 </mapper>

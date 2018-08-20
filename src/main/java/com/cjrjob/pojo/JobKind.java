@@ -5,12 +5,9 @@ public class JobKind {
 
     private String jobKindName;
 
-    private String backup;
-
-    public JobKind(Integer jobKindId, String jobKindName, String backup) {
+    public JobKind(Integer jobKindId, String jobKindName) {
         this.jobKindId = jobKindId;
         this.jobKindName = jobKindName;
-        this.backup = backup;
     }
 
     public JobKind() {
@@ -31,13 +28,5 @@ public class JobKind {
 
     public void setJobKindName(String jobKindName) {
         this.jobKindName = jobKindName == null ? null : jobKindName.trim();
-    }
-
-    public String getBackup() {
-        return backup;
-    }
-
-    public void setBackup(String backup) {
-        this.backup = backup == null ? null : backup.trim();
     }
 }

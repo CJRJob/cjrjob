@@ -15,16 +15,13 @@ public class Seeker {
 
     private Date regTime;
 
-    private String backup;
-
-    public Seeker(Integer jobSeekerId, String username, String password, String email, String role, Date regTime, String backup) {
+    public Seeker(Integer jobSeekerId, String username, String password, String email, String role, Date regTime) {
         this.jobSeekerId = jobSeekerId;
         this.username = username;
         this.password = password;
         this.email = email;
         this.role = role;
         this.regTime = regTime;
-        this.backup = backup;
     }
 
     public Seeker() {
@@ -77,13 +74,5 @@ public class Seeker {
 
     public void setRegTime(Date regTime) {
         this.regTime = regTime;
-    }
-
-    public String getBackup() {
-        return backup;
-    }
-
-    public void setBackup(String backup) {
-        this.backup = backup == null ? null : backup.trim();
     }
 }

@@ -9,11 +9,10 @@
       <arg column="email" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="role" jdbcType="CHAR" javaType="java.lang.String" />
       <arg column="reg_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="backup" jdbcType="CHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    job_seeker_id, username, password, email, role, reg_time, backup
+    job_seeker_id, username, password, email, role, reg_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -27,11 +26,11 @@
   </delete>
   <insert id="insert" parameterType="com.cjrjob.pojo.Seeker" >
     insert into job_seeker (job_seeker_id, username, password, 
-      email, role, reg_time, 
-      backup)
+      email, role, reg_time
+      )
     values (#{jobSeekerId,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{email,jdbcType=VARCHAR}, #{role,jdbcType=CHAR}, #{regTime,jdbcType=TIMESTAMP}, 
-      #{backup,jdbcType=CHAR})
+      #{email,jdbcType=VARCHAR}, #{role,jdbcType=CHAR}, #{regTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.cjrjob.pojo.Seeker" >
     insert into job_seeker
@@ -54,9 +53,6 @@
       <if test="regTime != null" >
         reg_time,
       </if>
-      <if test="backup != null" >
-        backup,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="jobSeekerId != null" >
@@ -76,9 +72,6 @@
       </if>
       <if test="regTime != null" >
         #{regTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="backup != null" >
-        #{backup,jdbcType=CHAR},
       </if>
     </trim>
   </insert>
@@ -100,9 +93,6 @@
       <if test="regTime != null" >
         reg_time = #{regTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="backup != null" >
-        backup = #{backup,jdbcType=CHAR},
-      </if>
     </set>
     where job_seeker_id = #{jobSeekerId,jdbcType=INTEGER}
   </update>
@@ -112,8 +102,7 @@
       password = #{password,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       role = #{role,jdbcType=CHAR},
-      reg_time = #{regTime,jdbcType=TIMESTAMP},
-      backup = #{backup,jdbcType=CHAR}
+      reg_time = #{regTime,jdbcType=TIMESTAMP}
     where job_seeker_id = #{jobSeekerId,jdbcType=INTEGER}
   </update>
 </mapper>

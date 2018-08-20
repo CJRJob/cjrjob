@@ -5,11 +5,10 @@
     <constructor >
       <idArg column="job_kind_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="job_kind_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="backup" jdbcType="VARCHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    job_kind_id, job_kind_name, backup
+    job_kind_id, job_kind_name
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -22,10 +21,8 @@
     where job_kind_id = #{jobKindId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.cjrjob.pojo.JobKind" >
-    insert into job_kind (job_kind_id, job_kind_name, backup
-      )
-    values (#{jobKindId,jdbcType=INTEGER}, #{jobKindName,jdbcType=VARCHAR}, #{backup,jdbcType=VARCHAR}
-      )
+    insert into job_kind (job_kind_id, job_kind_name)
+    values (#{jobKindId,jdbcType=INTEGER}, #{jobKindName,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.cjrjob.pojo.JobKind" >
     insert into job_kind
@@ -36,9 +33,6 @@
       <if test="jobKindName != null" >
         job_kind_name,
       </if>
-      <if test="backup != null" >
-        backup,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="jobKindId != null" >
@@ -46,9 +40,6 @@
       </if>
       <if test="jobKindName != null" >
         #{jobKindName,jdbcType=VARCHAR},
-      </if>
-      <if test="backup != null" >
-        #{backup,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -58,16 +49,12 @@
       <if test="jobKindName != null" >
         job_kind_name = #{jobKindName,jdbcType=VARCHAR},
       </if>
-      <if test="backup != null" >
-        backup = #{backup,jdbcType=VARCHAR},
-      </if>
     </set>
     where job_kind_id = #{jobKindId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.cjrjob.pojo.JobKind" >
     update job_kind
-    set job_kind_name = #{jobKindName,jdbcType=VARCHAR},
-      backup = #{backup,jdbcType=VARCHAR}
+    set job_kind_name = #{jobKindName,jdbcType=VARCHAR}
     where job_kind_id = #{jobKindId,jdbcType=INTEGER}
   </update>
 </mapper>

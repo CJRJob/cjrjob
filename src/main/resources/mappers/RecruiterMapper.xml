@@ -11,12 +11,11 @@
       <arg column="introduction" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="logoURI" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="location" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="backup" jdbcType="VARCHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
     job_recruiter_id, job_recruiter_name, field, scale, nature, introduction, logoURI, 
-    location, backup
+    location
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -31,12 +30,12 @@
   <insert id="insert" parameterType="com.cjrjob.pojo.Recruiter" >
     insert into job_recruiter (job_recruiter_id, job_recruiter_name, 
       field, scale, nature, 
-      introduction, logoURI, location, 
-      backup)
+      introduction, logoURI, location
+      )
     values (#{jobRecruiterId,jdbcType=INTEGER}, #{jobRecruiterName,jdbcType=VARCHAR}, 
       #{field,jdbcType=VARCHAR}, #{scale,jdbcType=VARCHAR}, #{nature,jdbcType=VARCHAR}, 
-      #{introduction,jdbcType=VARCHAR}, #{logouri,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR}, 
-      #{backup,jdbcType=VARCHAR})
+      #{introduction,jdbcType=VARCHAR}, #{logouri,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.cjrjob.pojo.Recruiter" >
     insert into job_recruiter
@@ -65,9 +64,6 @@
       <if test="location != null" >
         location,
       </if>
-      <if test="backup != null" >
-        backup,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="jobRecruiterId != null" >
@@ -93,9 +89,6 @@
       </if>
       <if test="location != null" >
         #{location,jdbcType=VARCHAR},
-      </if>
-      <if test="backup != null" >
-        #{backup,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -123,9 +116,6 @@
       <if test="location != null" >
         location = #{location,jdbcType=VARCHAR},
       </if>
-      <if test="backup != null" >
-        backup = #{backup,jdbcType=VARCHAR},
-      </if>
     </set>
     where job_recruiter_id = #{jobRecruiterId,jdbcType=INTEGER}
   </update>
@@ -137,8 +127,7 @@
       nature = #{nature,jdbcType=VARCHAR},
       introduction = #{introduction,jdbcType=VARCHAR},
       logoURI = #{logouri,jdbcType=VARCHAR},
-      location = #{location,jdbcType=VARCHAR},
-      backup = #{backup,jdbcType=VARCHAR}
+      location = #{location,jdbcType=VARCHAR}
     where job_recruiter_id = #{jobRecruiterId,jdbcType=INTEGER}
   </update>
 </mapper>

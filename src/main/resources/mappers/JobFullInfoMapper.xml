@@ -10,16 +10,13 @@
       <arg column="welfare" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="demand_education" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="demand_experience" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="demand_gender" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="demand_gender" jdbcType="CHAR" javaType="java.lang.String" />
       <arg column="demand_age" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="job_location" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="people_num" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="job_kind_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="job_city_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="job_recruiter_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="backup_1" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="backup_2" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="backup_3" jdbcType="VARCHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.cjrjob.pojo.JobFullInfo" >
@@ -31,23 +28,19 @@
       <arg column="welfare" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="demand_education" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="demand_experience" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="demand_gender" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="demand_gender" jdbcType="CHAR" javaType="java.lang.String" />
       <arg column="demand_age" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="job_location" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="people_num" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="job_kind_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="job_city_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="job_recruiter_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="backup_1" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="backup_2" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="backup_3" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="job_content" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
     job_full_info_id, title, money, create_time, welfare, demand_education, demand_experience, 
-    demand_gender, demand_age, job_location, people_num, job_kind_id, job_city_id, job_recruiter_id, 
-    backup_1, backup_2, backup_3
+    demand_gender, demand_age, job_location, people_num, job_kind_id, job_city_id, job_recruiter_id
   </sql>
   <sql id="Blob_Column_List" >
     job_content
@@ -69,15 +62,13 @@
       create_time, welfare, demand_education, 
       demand_experience, demand_gender, demand_age, 
       job_location, people_num, job_kind_id, 
-      job_city_id, job_recruiter_id, backup_1, 
-      backup_2, backup_3, job_content
+      job_city_id, job_recruiter_id, job_content
       )
     values (#{jobFullInfoId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{money,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{welfare,jdbcType=VARCHAR}, #{demandEducation,jdbcType=VARCHAR}, 
-      #{demandExperience,jdbcType=VARCHAR}, #{demandGender,jdbcType=VARCHAR}, #{demandAge,jdbcType=VARCHAR}, 
+      #{demandExperience,jdbcType=VARCHAR}, #{demandGender,jdbcType=CHAR}, #{demandAge,jdbcType=VARCHAR}, 
       #{jobLocation,jdbcType=VARCHAR}, #{peopleNum,jdbcType=VARCHAR}, #{jobKindId,jdbcType=INTEGER}, 
-      #{jobCityId,jdbcType=INTEGER}, #{jobRecruiterId,jdbcType=INTEGER}, #{backup1,jdbcType=VARCHAR}, 
-      #{backup2,jdbcType=VARCHAR}, #{backup3,jdbcType=VARCHAR}, #{jobContent,jdbcType=LONGVARCHAR}
+      #{jobCityId,jdbcType=INTEGER}, #{jobRecruiterId,jdbcType=INTEGER}, #{jobContent,jdbcType=LONGVARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.cjrjob.pojo.JobFullInfo" >
@@ -125,15 +116,6 @@
       <if test="jobRecruiterId != null" >
         job_recruiter_id,
       </if>
-      <if test="backup1 != null" >
-        backup_1,
-      </if>
-      <if test="backup2 != null" >
-        backup_2,
-      </if>
-      <if test="backup3 != null" >
-        backup_3,
-      </if>
       <if test="jobContent != null" >
         job_content,
       </if>
@@ -161,7 +143,7 @@
         #{demandExperience,jdbcType=VARCHAR},
       </if>
       <if test="demandGender != null" >
-        #{demandGender,jdbcType=VARCHAR},
+        #{demandGender,jdbcType=CHAR},
       </if>
       <if test="demandAge != null" >
         #{demandAge,jdbcType=VARCHAR},
@@ -180,15 +162,6 @@
       </if>
       <if test="jobRecruiterId != null" >
         #{jobRecruiterId,jdbcType=INTEGER},
-      </if>
-      <if test="backup1 != null" >
-        #{backup1,jdbcType=VARCHAR},
-      </if>
-      <if test="backup2 != null" >
-        #{backup2,jdbcType=VARCHAR},
-      </if>
-      <if test="backup3 != null" >
-        #{backup3,jdbcType=VARCHAR},
       </if>
       <if test="jobContent != null" >
         #{jobContent,jdbcType=LONGVARCHAR},
@@ -217,7 +190,7 @@
         demand_experience = #{demandExperience,jdbcType=VARCHAR},
       </if>
       <if test="demandGender != null" >
-        demand_gender = #{demandGender,jdbcType=VARCHAR},
+        demand_gender = #{demandGender,jdbcType=CHAR},
       </if>
       <if test="demandAge != null" >
         demand_age = #{demandAge,jdbcType=VARCHAR},
@@ -237,15 +210,6 @@
       <if test="jobRecruiterId != null" >
         job_recruiter_id = #{jobRecruiterId,jdbcType=INTEGER},
       </if>
-      <if test="backup1 != null" >
-        backup_1 = #{backup1,jdbcType=VARCHAR},
-      </if>
-      <if test="backup2 != null" >
-        backup_2 = #{backup2,jdbcType=VARCHAR},
-      </if>
-      <if test="backup3 != null" >
-        backup_3 = #{backup3,jdbcType=VARCHAR},
-      </if>
       <if test="jobContent != null" >
         job_content = #{jobContent,jdbcType=LONGVARCHAR},
       </if>
@@ -260,16 +224,13 @@
       welfare = #{welfare,jdbcType=VARCHAR},
       demand_education = #{demandEducation,jdbcType=VARCHAR},
       demand_experience = #{demandExperience,jdbcType=VARCHAR},
-      demand_gender = #{demandGender,jdbcType=VARCHAR},
+      demand_gender = #{demandGender,jdbcType=CHAR},
       demand_age = #{demandAge,jdbcType=VARCHAR},
       job_location = #{jobLocation,jdbcType=VARCHAR},
       people_num = #{peopleNum,jdbcType=VARCHAR},
       job_kind_id = #{jobKindId,jdbcType=INTEGER},
       job_city_id = #{jobCityId,jdbcType=INTEGER},
       job_recruiter_id = #{jobRecruiterId,jdbcType=INTEGER},
-      backup_1 = #{backup1,jdbcType=VARCHAR},
-      backup_2 = #{backup2,jdbcType=VARCHAR},
-      backup_3 = #{backup3,jdbcType=VARCHAR},
       job_content = #{jobContent,jdbcType=LONGVARCHAR}
     where job_full_info_id = #{jobFullInfoId,jdbcType=INTEGER}
   </update>
@@ -281,16 +242,13 @@
       welfare = #{welfare,jdbcType=VARCHAR},
       demand_education = #{demandEducation,jdbcType=VARCHAR},
       demand_experience = #{demandExperience,jdbcType=VARCHAR},
-      demand_gender = #{demandGender,jdbcType=VARCHAR},
+      demand_gender = #{demandGender,jdbcType=CHAR},
       demand_age = #{demandAge,jdbcType=VARCHAR},
       job_location = #{jobLocation,jdbcType=VARCHAR},
       people_num = #{peopleNum,jdbcType=VARCHAR},
       job_kind_id = #{jobKindId,jdbcType=INTEGER},
       job_city_id = #{jobCityId,jdbcType=INTEGER},
-      job_recruiter_id = #{jobRecruiterId,jdbcType=INTEGER},
-      backup_1 = #{backup1,jdbcType=VARCHAR},
-      backup_2 = #{backup2,jdbcType=VARCHAR},
-      backup_3 = #{backup3,jdbcType=VARCHAR}
+      job_recruiter_id = #{jobRecruiterId,jdbcType=INTEGER}
     where job_full_info_id = #{jobFullInfoId,jdbcType=INTEGER}
   </update>
 </mapper>

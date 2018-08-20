@@ -17,9 +17,7 @@ public class Recruiter {
 
     private String location;
 
-    private String backup;
-
-    public Recruiter(Integer jobRecruiterId, String jobRecruiterName, String field, String scale, String nature, String introduction, String logouri, String location, String backup) {
+    public Recruiter(Integer jobRecruiterId, String jobRecruiterName, String field, String scale, String nature, String introduction, String logouri, String location) {
         this.jobRecruiterId = jobRecruiterId;
         this.jobRecruiterName = jobRecruiterName;
         this.field = field;
@@ -28,7 +26,6 @@ public class Recruiter {
         this.introduction = introduction;
         this.logouri = logouri;
         this.location = location;
-        this.backup = backup;
     }
 
     public Recruiter() {
@@ -97,13 +94,5 @@ public class Recruiter {
 
     public void setLocation(String location) {
         this.location = location == null ? null : location.trim();
-    }
-
-    public String getBackup() {
-        return backup;
-    }
-
-    public void setBackup(String backup) {
-        this.backup = backup == null ? null : backup.trim();
     }
 }

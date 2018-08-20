@@ -11,14 +11,11 @@ public class Collection {
 
     private Integer jobFullInfo;
 
-    private String backup;
-
-    public Collection(Integer jobCollection, Date createTime, Integer jobSeekerId, Integer jobFullInfo, String backup) {
+    public Collection(Integer jobCollection, Date createTime, Integer jobSeekerId, Integer jobFullInfo) {
         this.jobCollection = jobCollection;
         this.createTime = createTime;
         this.jobSeekerId = jobSeekerId;
         this.jobFullInfo = jobFullInfo;
-        this.backup = backup;
     }
 
     public Collection() {
@@ -55,13 +52,5 @@ public class Collection {
 
     public void setJobFullInfo(Integer jobFullInfo) {
         this.jobFullInfo = jobFullInfo;
-    }
-
-    public String getBackup() {
-        return backup;
-    }
-
-    public void setBackup(String backup) {
-        this.backup = backup == null ? null : backup.trim();
     }
 }

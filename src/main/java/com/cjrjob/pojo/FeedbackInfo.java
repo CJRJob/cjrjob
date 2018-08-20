@@ -13,17 +13,14 @@ public class FeedbackInfo {
 
     private Integer jobSeekerId;
 
-    private String backup;
-
     private String feedbackContent;
 
-    public FeedbackInfo(Integer feedbackInfoId, String feedbackKind, String contact, Date createTime, Integer jobSeekerId, String backup, String feedbackContent) {
+    public FeedbackInfo(Integer feedbackInfoId, String feedbackKind, String contact, Date createTime, Integer jobSeekerId, String feedbackContent) {
         this.feedbackInfoId = feedbackInfoId;
         this.feedbackKind = feedbackKind;
         this.contact = contact;
         this.createTime = createTime;
         this.jobSeekerId = jobSeekerId;
-        this.backup = backup;
         this.feedbackContent = feedbackContent;
     }
 
@@ -69,14 +66,6 @@ public class FeedbackInfo {
 
     public void setJobSeekerId(Integer jobSeekerId) {
         this.jobSeekerId = jobSeekerId;
-    }
-
-    public String getBackup() {
-        return backup;
-    }
-
-    public void setBackup(String backup) {
-        this.backup = backup == null ? null : backup.trim();
     }
 
     public String getFeedbackContent() {

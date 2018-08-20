@@ -11,14 +11,11 @@ public class Delivery {
 
     private Integer jobFullInfo;
 
-    private String backup;
-
-    public Delivery(Integer jobDeliveryId, Date createTime, Integer jobSeekerId, Integer jobFullInfo, String backup) {
+    public Delivery(Integer jobDeliveryId, Date createTime, Integer jobSeekerId, Integer jobFullInfo) {
         this.jobDeliveryId = jobDeliveryId;
         this.createTime = createTime;
         this.jobSeekerId = jobSeekerId;
         this.jobFullInfo = jobFullInfo;
-        this.backup = backup;
     }
 
     public Delivery() {
@@ -55,13 +52,5 @@ public class Delivery {
 
     public void setJobFullInfo(Integer jobFullInfo) {
         this.jobFullInfo = jobFullInfo;
-    }
-
-    public String getBackup() {
-        return backup;
-    }
-
-    public void setBackup(String backup) {
-        this.backup = backup == null ? null : backup.trim();
     }
 }

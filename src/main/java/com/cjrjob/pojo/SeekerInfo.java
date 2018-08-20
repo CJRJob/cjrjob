@@ -65,13 +65,7 @@ public class SeekerInfo {
 
     private String resumeDocumentUri;
 
-    private String backup1;
-
-    private String backup2;
-
-    private String backup3;
-
-    public SeekerInfo(Integer jobSeekerInfoId, String name, Date birthday, String highestEducation, String hopeJob, String phone, String disabilityKind, String gender, String location, String workExperience, String hopeCity, String email, String jobKind, String hopeMoney, String seekerStatus, String nation, String marriage, String household, Date graduationTime, String qq, String expectIndustry, String seekerJob, Date startTime, String height, String political, String idnumber, String familyPhone, String address, Integer jobSeekerId, String headImgUri, String resumeDocumentUri, String backup1, String backup2, String backup3) {
+    public SeekerInfo(Integer jobSeekerInfoId, String name, Date birthday, String highestEducation, String hopeJob, String phone, String disabilityKind, String gender, String location, String workExperience, String hopeCity, String email, String jobKind, String hopeMoney, String seekerStatus, String nation, String marriage, String household, Date graduationTime, String qq, String expectIndustry, String seekerJob, Date startTime, String height, String political, String idnumber, String familyPhone, String address, Integer jobSeekerId, String headImgUri, String resumeDocumentUri) {
         this.jobSeekerInfoId = jobSeekerInfoId;
         this.name = name;
         this.birthday = birthday;
@@ -103,9 +97,6 @@ public class SeekerInfo {
         this.jobSeekerId = jobSeekerId;
         this.headImgUri = headImgUri;
         this.resumeDocumentUri = resumeDocumentUri;
-        this.backup1 = backup1;
-        this.backup2 = backup2;
-        this.backup3 = backup3;
     }
 
     public SeekerInfo() {
@@ -358,29 +349,5 @@ public class SeekerInfo {
 
     public void setResumeDocumentUri(String resumeDocumentUri) {
         this.resumeDocumentUri = resumeDocumentUri == null ? null : resumeDocumentUri.trim();
-    }
-
-    public String getBackup1() {
-        return backup1;
-    }
-
-    public void setBackup1(String backup1) {
-        this.backup1 = backup1 == null ? null : backup1.trim();
-    }
-
-    public String getBackup2() {
-        return backup2;
-    }
-
-    public void setBackup2(String backup2) {
-        this.backup2 = backup2 == null ? null : backup2.trim();
-    }
-
-    public String getBackup3() {
-        return backup3;
-    }
-
-    public void setBackup3(String backup3) {
-        this.backup3 = backup3 == null ? null : backup3.trim();
     }
 }

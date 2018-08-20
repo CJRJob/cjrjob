@@ -11,14 +11,11 @@ public class BannerInfo {
 
     private Date createTime;
 
-    private String backup;
-
-    public BannerInfo(Integer bannerInfoId, String imgUri, String imgContent, Date createTime, String backup) {
+    public BannerInfo(Integer bannerInfoId, String imgUri, String imgContent, Date createTime) {
         this.bannerInfoId = bannerInfoId;
         this.imgUri = imgUri;
         this.imgContent = imgContent;
         this.createTime = createTime;
-        this.backup = backup;
     }
 
     public BannerInfo() {
@@ -55,13 +52,5 @@ public class BannerInfo {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
-    }
-
-    public String getBackup() {
-        return backup;
-    }
-
-    public void setBackup(String backup) {
-        this.backup = backup == null ? null : backup.trim();
     }
 }

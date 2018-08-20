@@ -7,11 +7,10 @@
       <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="job_seeker_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="job_full_info" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="backup" jdbcType="VARCHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    job_delivery_id, create_time, job_seeker_id, job_full_info, backup
+    job_delivery_id, create_time, job_seeker_id, job_full_info
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -25,9 +24,9 @@
   </delete>
   <insert id="insert" parameterType="com.cjrjob.pojo.Delivery" >
     insert into job_delivery (job_delivery_id, create_time, job_seeker_id, 
-      job_full_info, backup)
+      job_full_info)
     values (#{jobDeliveryId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{jobSeekerId,jdbcType=INTEGER}, 
-      #{jobFullInfo,jdbcType=INTEGER}, #{backup,jdbcType=VARCHAR})
+      #{jobFullInfo,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.cjrjob.pojo.Delivery" >
     insert into job_delivery
@@ -44,9 +43,6 @@
       <if test="jobFullInfo != null" >
         job_full_info,
       </if>
-      <if test="backup != null" >
-        backup,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="jobDeliveryId != null" >
@@ -60,9 +56,6 @@
       </if>
       <if test="jobFullInfo != null" >
         #{jobFullInfo,jdbcType=INTEGER},
-      </if>
-      <if test="backup != null" >
-        #{backup,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -78,9 +71,6 @@
       <if test="jobFullInfo != null" >
         job_full_info = #{jobFullInfo,jdbcType=INTEGER},
       </if>
-      <if test="backup != null" >
-        backup = #{backup,jdbcType=VARCHAR},
-      </if>
     </set>
     where job_delivery_id = #{jobDeliveryId,jdbcType=INTEGER}
   </update>
@@ -88,8 +78,7 @@
     update job_delivery
     set create_time = #{createTime,jdbcType=TIMESTAMP},
       job_seeker_id = #{jobSeekerId,jdbcType=INTEGER},
-      job_full_info = #{jobFullInfo,jdbcType=INTEGER},
-      backup = #{backup,jdbcType=VARCHAR}
+      job_full_info = #{jobFullInfo,jdbcType=INTEGER}
     where job_delivery_id = #{jobDeliveryId,jdbcType=INTEGER}
   </update>
 </mapper>
