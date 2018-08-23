@@ -29,7 +29,7 @@
       email, role, reg_time
       )
     values (#{jobSeekerId,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{email,jdbcType=VARCHAR}, #{role,jdbcType=CHAR}, #{regTime,jdbcType=TIMESTAMP}
+      #{email,jdbcType=VARCHAR}, #{role,jdbcType=CHAR}, now()
       )
   </insert>
   <insert id="insertSelective" parameterType="com.cjrjob.pojo.Seeker" >
@@ -71,7 +71,7 @@
         #{role,jdbcType=CHAR},
       </if>
       <if test="regTime != null" >
-        #{regTime,jdbcType=TIMESTAMP},
+        now(),
       </if>
     </trim>
   </insert>
@@ -91,7 +91,7 @@
         role = #{role,jdbcType=CHAR},
       </if>
       <if test="regTime != null" >
-        reg_time = #{regTime,jdbcType=TIMESTAMP},
+        reg_time = now(),
       </if>
     </set>
     where job_seeker_id = #{jobSeekerId,jdbcType=INTEGER}
@@ -105,4 +105,18 @@
       reg_time = #{regTime,jdbcType=TIMESTAMP}
     where job_seeker_id = #{jobSeekerId,jdbcType=INTEGER}
   </update>
+
+  <select id="checkEmail" parameterType="string" resultType="int">
+    select count(1)
+    from job_seeker
+    where email = #{email}
+  </select>
+
+  <select id="selectLogin" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from job_seeker
+    where email = #{email}
+    and password = #{password}
+  </select>
 </mapper>
