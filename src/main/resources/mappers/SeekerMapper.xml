@@ -15,7 +15,7 @@
     job_seeker_id, username, password, email, role, reg_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from job_seeker
     where job_seeker_id = #{jobSeekerId,jdbcType=INTEGER}
@@ -25,10 +25,10 @@
     where job_seeker_id = #{jobSeekerId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.cjrjob.pojo.Seeker" >
-    insert into job_seeker (job_seeker_id, username, password, 
+    insert into job_seeker (job_seeker_id, username, password,
       email, role, reg_time
       )
-    values (#{jobSeekerId,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+    values (#{jobSeekerId,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
       #{email,jdbcType=VARCHAR}, #{role,jdbcType=CHAR}, #{regTime,jdbcType=TIMESTAMP}
       )
   </insert>
