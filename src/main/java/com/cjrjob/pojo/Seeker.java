@@ -11,17 +11,23 @@ public class Seeker {
 
     private String email;
 
+    private Integer verifycode;
+
     private String role;
 
     private Date regTime;
 
-    public Seeker(Integer jobSeekerId, String username, String password, String email, String role, Date regTime) {
+    private Date updateTime;
+
+    public Seeker(Integer jobSeekerId, String username, String password, String email, Integer verifycode, String role, Date regTime, Date updateTime) {
         this.jobSeekerId = jobSeekerId;
         this.username = username;
         this.password = password;
         this.email = email;
+        this.verifycode = verifycode;
         this.role = role;
         this.regTime = regTime;
+        this.updateTime = updateTime;
     }
 
     public Seeker() {
@@ -60,6 +66,14 @@ public class Seeker {
         this.email = email == null ? null : email.trim();
     }
 
+    public Integer getVerifycode() {
+        return verifycode;
+    }
+
+    public void setVerifycode(Integer verifycode) {
+        this.verifycode = verifycode;
+    }
+
     public String getRole() {
         return role;
     }
@@ -74,5 +88,13 @@ public class Seeker {
 
     public void setRegTime(Date regTime) {
         this.regTime = regTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 }

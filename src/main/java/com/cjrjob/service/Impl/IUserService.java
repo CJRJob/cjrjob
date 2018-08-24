@@ -14,4 +14,10 @@ public interface IUserService {
     ServerResponse<Seeker> login(String email, String password);
 
     ServerResponse<String> register(Seeker seeker);
+
+    ServerResponse<String> sendCode(String fromEmail);
+
+    ServerResponse<String> checkEmailCode(String email, int code);
+
+    ServerResponse<String> restPassword(String email, String passwordNew, String forgetToken);
 }

@@ -7,12 +7,14 @@
       <arg column="username" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="password" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="email" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="verifyCode" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="role" jdbcType="CHAR" javaType="java.lang.String" />
       <arg column="reg_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    job_seeker_id, username, password, email, role, reg_time
+    job_seeker_id, username, password, email, verifyCode, role, reg_time, update_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -26,11 +28,11 @@
   </delete>
   <insert id="insert" parameterType="com.cjrjob.pojo.Seeker" >
     insert into job_seeker (job_seeker_id, username, password, 
-      email, role, reg_time
-      )
+      email, verifyCode, role, 
+      reg_time, update_time)
     values (#{jobSeekerId,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{email,jdbcType=VARCHAR}, #{role,jdbcType=CHAR}, now()
-      )
+      #{email,jdbcType=VARCHAR}, #{verifycode,jdbcType=INTEGER}, #{role,jdbcType=CHAR}, 
+      #{regTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.cjrjob.pojo.Seeker" >
     insert into job_seeker
@@ -47,11 +49,17 @@
       <if test="email != null" >
         email,
       </if>
+      <if test="verifycode != null" >
+        verifyCode,
+      </if>
       <if test="role != null" >
         role,
       </if>
       <if test="regTime != null" >
         reg_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -67,11 +75,17 @@
       <if test="email != null" >
         #{email,jdbcType=VARCHAR},
       </if>
+      <if test="verifycode != null" >
+        #{verifycode,jdbcType=INTEGER},
+      </if>
       <if test="role != null" >
         #{role,jdbcType=CHAR},
       </if>
       <if test="regTime != null" >
-        now(),
+        #{regTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -87,11 +101,17 @@
       <if test="email != null" >
         email = #{email,jdbcType=VARCHAR},
       </if>
+      <if test="verifycode != null" >
+        verifyCode = #{verifycode,jdbcType=INTEGER},
+      </if>
       <if test="role != null" >
         role = #{role,jdbcType=CHAR},
       </if>
       <if test="regTime != null" >
-        reg_time = now(),
+        reg_time = #{regTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where job_seeker_id = #{jobSeekerId,jdbcType=INTEGER}
@@ -101,14 +121,15 @@
     set username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
+      verifyCode = #{verifycode,jdbcType=INTEGER},
       role = #{role,jdbcType=CHAR},
-      reg_time = #{regTime,jdbcType=TIMESTAMP}
+      reg_time = #{regTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
     where job_seeker_id = #{jobSeekerId,jdbcType=INTEGER}
   </update>
 
-  <select id="checkEmail" parameterType="string" resultType="int">
-    select count(1)
-    from job_seeker
+  <select id="checkEmail" resultType="java.lang.Integer" parameterType="string">
+    select count(1) from job_seeker
     where email = #{email}
   </select>
 
@@ -118,5 +139,18 @@
     from job_seeker
     where email = #{email}
     and password = #{password}
+  </select>
+
+  <update id="updatePasswordByEmail" parameterType="map">
+    update job_seeker
+    set password = #{md5Password}
+    where email = #{email}
+  </update>
+
+  <select id="findSeekerByEmail" parameterType="string" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from job_seeker
+    where email = #{email}
   </select>
 </mapper>

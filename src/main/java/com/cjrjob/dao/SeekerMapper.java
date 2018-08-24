@@ -18,5 +18,9 @@ public interface SeekerMapper {
 
     int checkEmail(String email);
 
-    Seeker selectLogin(@Param("email")String email, @Param("password") String password);
+    Seeker selectLogin(@Param("email") String email, @Param("password") String password);
+
+    Seeker findSeekerByEmail(String email);
+
+    int updatePasswordByEmail(@Param("email") String email, @Param("password") String password);
 }

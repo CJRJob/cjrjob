@@ -1,6 +1,7 @@
 package com.cjrjob.controller;
 
 import com.cjrjob.common.Const;
+import com.cjrjob.common.ResponseCode;
 import com.cjrjob.common.ServerResponse;
 import com.cjrjob.pojo.Seeker;
 import com.cjrjob.service.Impl.IUserService;
@@ -22,7 +23,7 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/user/")
 public class UserController {
 
-    @Autowired
+    @Autowired(required=true)
     private IUserService iUserService;
 
     // 登录
@@ -51,5 +52,39 @@ public class UserController {
     public ServerResponse<String> logout(HttpSession session){
         session.removeAttribute(Const.CURRENT_USER);
         return ServerResponse.createBySuccess();
+    }
+
+    @RequestMapping("get_seeker_info")
+    @ResponseBody
+    // 获取用户登录信息
+    public ServerResponse getSeekerInfo(HttpSession session){
+        Seeker seeker = (Seeker) session.getAttribute(Const.CURRENT_USER);
+        if (seeker == null) {
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), ResponseCode.NEED_LOGIN.getDesc());
+        }
+        return ServerResponse.createBySuccess(seeker);
+    }
+
+    @RequestMapping("send_code.do")
+    @ResponseBody
+    // 发送验证码
+    public ServerResponse<String> sendCode(String fromEmail){
+        return iUserService.sendCode(fromEmail);
+    }
+
+
+    @RequestMapping("check_emailCode.do")
+    @ResponseBody
+    // 校验邮箱和验证码是否正确
+    public ServerResponse<String> checkEmailCode(String email, int code){
+
+        return iUserService.checkEmailCode(email, code);
+    }
+
+    @RequestMapping("rest_password.do")
+    @ResponseBody
+    // 重置密码
+    public ServerResponse<String> restPassword(String email, String passwordNew, String forgetToken){
+        return iUserService.restPassword(email, passwordNew, forgetToken);
     }
 }
