@@ -1,7 +1,8 @@
-package com.cjrjob.service.Impl;
+package com.cjrjob.service;
 
 import com.cjrjob.common.ServerResponse;
 import com.cjrjob.pojo.Seeker;
+import com.cjrjob.pojo.SeekerInfo;
 
 /**
  * @Author: LR
@@ -19,5 +20,11 @@ public interface IUserService {
 
     ServerResponse<String> checkEmailCode(String email, int code);
 
-    ServerResponse<String> restPassword(String email, String passwordNew, String forgetToken);
+    ServerResponse<String> forgetRestPassword(String email, String passwordNew, String forgetToken);
+
+    ServerResponse<String> restPassword(String passwordOld, String passwordNew, Seeker seeker);
+
+    ServerResponse<SeekerInfo> updateInformation(SeekerInfo seekerInfo);
+
+    ServerResponse<SeekerInfo> seekInfoDetail(String email);
 }

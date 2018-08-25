@@ -4,7 +4,8 @@ import com.cjrjob.common.Const;
 import com.cjrjob.common.ResponseCode;
 import com.cjrjob.common.ServerResponse;
 import com.cjrjob.pojo.Seeker;
-import com.cjrjob.service.Impl.IUserService;
+import com.cjrjob.pojo.SeekerInfo;
+import com.cjrjob.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -81,10 +82,47 @@ public class UserController {
         return iUserService.checkEmailCode(email, code);
     }
 
-    @RequestMapping("rest_password.do")
+    @RequestMapping("forget_rest_password.do")
     @ResponseBody
     // 重置密码
-    public ServerResponse<String> restPassword(String email, String passwordNew, String forgetToken){
-        return iUserService.restPassword(email, passwordNew, forgetToken);
+    public ServerResponse<String> forgetRestPassword(String email, String passwordNew, String forgetToken){
+        return iUserService.forgetRestPassword(email, passwordNew, forgetToken);
+    }
+
+    @RequestMapping(value = "rest_password.do", method = RequestMethod.POST)
+    @ResponseBody
+    // 登录状态的重置密码
+    public ServerResponse<String> restPasswprd(HttpSession session, String passwordOld, String passwordNew){
+        Seeker seeker = (Seeker) session.getAttribute(Const.CURRENT_USER);
+        if (seeker == null) {
+            return ServerResponse.createByErrorMessage("用户未登录");
+        }
+        return iUserService.restPassword(passwordOld, passwordNew, seeker);
+    }
+
+
+    @RequestMapping("update_seeker_info.do")
+    @ResponseBody
+    // 更新用户个人信息
+    public ServerResponse<SeekerInfo> updateSeekerInfo(HttpSession session, SeekerInfo seekerInfo){
+        Seeker currentSeeker = (Seeker) session.getAttribute(Const.CURRENT_USER);
+        if (currentSeeker == null) {
+            return ServerResponse.createByErrorMessage("用户未登陆");
+        }
+
+        seekerInfo.setEmail(currentSeeker.getEmail());
+        ServerResponse<SeekerInfo> response = iUserService.updateInformation(seekerInfo);
+
+        return response;
+    }
+
+    @RequestMapping("seeker_info_detail.do")
+    @ResponseBody
+    public ServerResponse<SeekerInfo> seekerInfoDetail(HttpSession session){
+        Seeker currentUser = (Seeker) session.getAttribute(Const.CURRENT_USER);
+        if (currentUser == null){
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "未登陆, 需要强制登陆");
+        }
+        return iUserService.seekInfoDetail(currentUser.getEmail());
     }
 }

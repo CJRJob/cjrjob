@@ -14,4 +14,6 @@ public interface SeekerInfoMapper {
     int updateByPrimaryKeySelective(SeekerInfo record);
 
     int updateByPrimaryKey(SeekerInfo record);
+
+    SeekerInfo findSeekerByEmail(String email);
 }

@@ -1,11 +1,13 @@
-package com.cjrjob.service.Impl.lmpl;
+package com.cjrjob.service.lmpl;
 
 import com.cjrjob.common.Const;
 import com.cjrjob.common.ServerResponse;
 import com.cjrjob.common.TokenCache;
+import com.cjrjob.dao.SeekerInfoMapper;
 import com.cjrjob.dao.SeekerMapper;
 import com.cjrjob.pojo.Seeker;
-import com.cjrjob.service.Impl.IUserService;
+import com.cjrjob.pojo.SeekerInfo;
+import com.cjrjob.service.IUserService;
 import com.cjrjob.util.MD5Util;
 import org.apache.commons.lang3.StringUtils;
 
@@ -36,6 +38,9 @@ public class UserServiceImpl implements IUserService {
 
     @Autowired
     private SeekerMapper seekerMapper;
+
+    @Autowired
+    private SeekerInfoMapper seekerInfoMapper;
 
     // 登录
     public ServerResponse<Seeker> login(String email, String password){
@@ -153,7 +158,7 @@ public class UserServiceImpl implements IUserService {
 
 
     //重置密码
-    public ServerResponse<String> restPassword(String email, String passwordNew, String forgetToken){
+    public ServerResponse<String> forgetRestPassword(String email, String passwordNew, String forgetToken){
         // 判断Token是否为空
         if (StringUtils.isBlank(forgetToken)){
             return ServerResponse.createByErrorMessage("参数错误, token需要传递");
@@ -181,6 +186,85 @@ public class UserServiceImpl implements IUserService {
             return ServerResponse.createByErrorMessage("Token错误,请重新获取重置密码的token");
         }
         return ServerResponse.createByErrorMessage("修改密码失败");
+
+    }
+
+    // 登录状态下的重置密码
+    public ServerResponse<String> restPassword(String passwordOld, String passwordNew, Seeker seeker){
+        // 防止横向越权，要校验一下这个用户的旧密码，一定要指定是这个用户
+        int resultCount = seekerMapper.checkPassword(MD5Util.MD5EncodeUtf8(passwordOld), seeker.getJobSeekerId());
+        if (resultCount == 0){
+            return ServerResponse.createByErrorMessage("旧密码错误");
+        }
+        seeker.setPassword(MD5Util.MD5EncodeUtf8(passwordNew));
+        // 选择性更新
+        int updateCount = seekerMapper.updateByPrimaryKeySelective(seeker);
+
+        if (updateCount > 0){
+            return ServerResponse.createBySuccess("更新密码成功");
+        }
+
+        return ServerResponse.createByErrorMessage("更新面失败");
+    }
+
+    // 查找用户详细信息
+    public ServerResponse<SeekerInfo> seekerInfoDetail(String email){
+        // 根据邮箱 查询用户的详细个人信息
+        SeekerInfo seekerInfo = seekerInfoMapper.findSeekerByEmail(email);
+        return ServerResponse.createBySuccess(seekerInfo);
+    }
+
+    //更新个人信息
+    public ServerResponse<SeekerInfo> updateInformation(SeekerInfo seekerInfo){
+
+        SeekerInfo seekerInfoDetail = this.seekInfoDetail(seekerInfo.getEmail()).getData();
+
+        SeekerInfo updateSeeker = new SeekerInfo();
+        updateSeeker.setJobSeekerInfoId(seekerInfoDetail.getJobSeekerInfoId());
+        updateSeeker.setName(seekerInfoDetail.getName());
+        updateSeeker.setBirthday(seekerInfoDetail.getBirthday());
+        updateSeeker.setHighestEducation(seekerInfoDetail.getHighestEducation());
+        updateSeeker.setHopeJob(seekerInfoDetail.getHopeJob());
+        updateSeeker.setPhone(seekerInfoDetail.getPhone());
+        updateSeeker.setDisabilityKind(seekerInfoDetail.getDisabilityKind());
+        updateSeeker.setGender(seekerInfoDetail.getGender());
+        updateSeeker.setLocation(seekerInfoDetail.getLocation());
+        updateSeeker.setWorkExperience(seekerInfoDetail.getWorkExperience());
+        updateSeeker.setHopeCity(seekerInfoDetail.getHopeCity());
+        updateSeeker.setJobKind(seekerInfoDetail.getJobKind());
+        updateSeeker.setHopeMoney(seekerInfoDetail.getHopeMoney());
+        updateSeeker.setSeekerStatus(seekerInfoDetail.getSeekerStatus());
+        updateSeeker.setNation(seekerInfoDetail.getNation());
+        updateSeeker.setMarriage(seekerInfoDetail.getMarriage());
+        updateSeeker.setHousehold(seekerInfoDetail.getHousehold());
+        updateSeeker.setGraduationTime(seekerInfoDetail.getGraduationTime());
+        updateSeeker.setQq(seekerInfoDetail.getQq());
+        updateSeeker.setExpectIndustry(seekerInfoDetail.getExpectIndustry());
+        updateSeeker.setStartTime(seekerInfoDetail.getStartTime());
+        updateSeeker.setHeight(seekerInfoDetail.getHeight());
+        updateSeeker.setPolitical(seekerInfoDetail.getPolitical());
+        updateSeeker.setIdnumber(seekerInfoDetail.getIdnumber());
+        updateSeeker.setFamilyPhone(seekerInfoDetail.getFamilyPhone());
+        updateSeeker.setSeekerJob(seekerInfoDetail.getSeekerJob());
+        updateSeeker.setAddress(seekerInfoDetail.getAddress());
+        updateSeeker.setHeadImgUri(seekerInfoDetail.getHeadImgUri());
+        updateSeeker.setResumeDocumentUri(seekerInfoDetail.getResumeDocumentUri());
+
+        int updateCount = seekerInfoMapper.updateByPrimaryKeySelective(updateSeeker);
+        if (updateCount > 0){
+            return ServerResponse.createBySuccess("个人信息更新成功", updateSeeker);
+        }
+        return ServerResponse.createByErrorMessage("更新个人信息失败");
+    }
+
+
+    // 获取个人详细信息
+    public ServerResponse<SeekerInfo> seekInfoDetail(String email){
+        SeekerInfo seekerInfo = seekerInfoMapper.findSeekerByEmail(email);
+        if (seekerInfo == null) {
+            return ServerResponse.createByErrorMessage("用户信息为空");
+        }
+        return ServerResponse.createBySuccess(seekerInfo);
 
     }
     }

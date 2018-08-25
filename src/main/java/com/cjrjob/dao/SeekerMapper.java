@@ -23,4 +23,6 @@ public interface SeekerMapper {
     Seeker findSeekerByEmail(String email);
 
     int updatePasswordByEmail(@Param("email") String email, @Param("password") String password);
+
+    int checkPassword(@Param("password") String password, @Param("seekId") Integer seekId);
 }

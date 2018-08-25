@@ -400,4 +400,11 @@
       resume_document_URI = #{resumeDocumentUri,jdbcType=VARCHAR}
     where job_seeker_info_id = #{jobSeekerInfoId,jdbcType=INTEGER}
   </update>
+
+  <select id="findSeekerByEmail" parameterType="string" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from job_seeker_info
+    where email = #{email}
+  </select>
 </mapper>

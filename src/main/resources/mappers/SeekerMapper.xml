@@ -154,4 +154,11 @@
     from job_seeker
     where email = #{email}
   </select>
+
+  <select id="checkPassword" parameterType="map" resultType="int">
+    select count(1)
+    from job_seeker
+    where password = #{password}
+    and job_seeker_id = #{seekId}
+  </select>
 </mapper>
