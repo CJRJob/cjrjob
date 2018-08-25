@@ -37,7 +37,7 @@ public class UserServiceImpl implements IUserService {
     @Autowired
     private SeekerMapper seekerMapper;
 
-
+    // 登录
     public ServerResponse<Seeker> login(String email, String password){
         ServerResponse validResponse = this.validEmail(email);
         if (validResponse.isSuccess()){

@@ -7,17 +7,17 @@
       <arg column="username" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="password" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="email" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="verifyCode" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="role" jdbcType="CHAR" javaType="java.lang.String" />
       <arg column="reg_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="verifyCode" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    job_seeker_id, username, password, email, verifyCode, role, reg_time, update_time
+    job_seeker_id, username, password, email, role, reg_time, verifyCode, update_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from job_seeker
     where job_seeker_id = #{jobSeekerId,jdbcType=INTEGER}
@@ -27,12 +27,13 @@
     where job_seeker_id = #{jobSeekerId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.cjrjob.pojo.Seeker" >
-    insert into job_seeker (job_seeker_id, username, password, 
-      email, verifyCode, role, 
-      reg_time, update_time)
-    values (#{jobSeekerId,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{email,jdbcType=VARCHAR}, #{verifycode,jdbcType=INTEGER}, #{role,jdbcType=CHAR}, 
-      #{regTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+    insert into job_seeker (job_seeker_id, username, password,
+      email, role, reg_time, verifyCode, update_time
+      )
+    values (#{jobSeekerId,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+      #{email,jdbcType=VARCHAR}, #{role,jdbcType=CHAR}, #{regTime,jdbcType=TIMESTAMP}, #{verifycode,jdbcType=INTEGER}
+      #{updateTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.cjrjob.pojo.Seeker" >
     insert into job_seeker
@@ -49,14 +50,14 @@
       <if test="email != null" >
         email,
       </if>
-      <if test="verifycode != null" >
-        verifyCode,
-      </if>
       <if test="role != null" >
         role,
       </if>
       <if test="regTime != null" >
         reg_time,
+      </if>
+      <if test="verifycode != null">
+        verifyCode,
       </if>
       <if test="updateTime != null" >
         update_time,
@@ -75,14 +76,14 @@
       <if test="email != null" >
         #{email,jdbcType=VARCHAR},
       </if>
-      <if test="verifycode != null" >
-        #{verifycode,jdbcType=INTEGER},
-      </if>
       <if test="role != null" >
         #{role,jdbcType=CHAR},
       </if>
       <if test="regTime != null" >
         #{regTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="verifycode != null">
+        #{verifycode,jdbcType=INTEGER},
       </if>
       <if test="updateTime != null" >
         #{updateTime,jdbcType=TIMESTAMP},
@@ -101,14 +102,14 @@
       <if test="email != null" >
         email = #{email,jdbcType=VARCHAR},
       </if>
-      <if test="verifycode != null" >
-        verifyCode = #{verifycode,jdbcType=INTEGER},
-      </if>
       <if test="role != null" >
         role = #{role,jdbcType=CHAR},
       </if>
       <if test="regTime != null" >
         reg_time = #{regTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="verifycode != null">
+        verifyCode = #{verifycode,jdbcType=INTEGER},
       </if>
       <if test="updateTime != null" >
         update_time = #{updateTime,jdbcType=TIMESTAMP},
@@ -121,9 +122,9 @@
     set username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
-      verifyCode = #{verifycode,jdbcType=INTEGER},
       role = #{role,jdbcType=CHAR},
       reg_time = #{regTime,jdbcType=TIMESTAMP},
+      verifyCode = #{verifycode,jdbcType=INTEGER},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where job_seeker_id = #{jobSeekerId,jdbcType=INTEGER}
   </update>
@@ -143,7 +144,7 @@
 
   <update id="updatePasswordByEmail" parameterType="map">
     update job_seeker
-    set password = #{md5Password}
+    set password = #{password}
     where email = #{email}
   </update>
 
