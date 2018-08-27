@@ -49,8 +49,9 @@ public class UserServiceImpl implements IUserService {
             return ServerResponse.createByErrorMessage("邮箱不存在");
         }
         // 密码登录MD5
-        String md5Password = MD5Util.MD5EncodeUtf8(password);
-        Seeker seeker = seekerMapper.selectLogin(email, md5Password);
+        //String md5Password = MD5Util.MD5EncodeUtf8(password);
+        System.out.println(password);
+        Seeker seeker = seekerMapper.selectLogin(email, password);
         if(seeker == null){
             return ServerResponse.createByErrorMessage("密码错误");
         }

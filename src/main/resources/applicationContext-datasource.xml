@@ -24,7 +24,6 @@
         <property name="fileEncoding" value="utf-8"/>
     </bean>
 
-
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="${db.driverClassName}"/>
         <property name="url" value="${db.url}"/>
@@ -88,7 +87,19 @@
         <property name="dataSource" ref="dataSource"/>
         <property name="rollbackOnCommitFailure" value="true"/>
     </bean>
-
+    <!-- 通知 -->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <!-- 传播行为 -->
+            <tx:method name="save*" propagation="REQUIRED" />
+            <tx:method name="insert*" propagation="REQUIRED" />
+            <tx:method name="delete*" propagation="REQUIRED" />
+            <tx:method name="update*" propagation="REQUIRED" />
+            <tx:method name="find*" propagation="SUPPORTS" read-only="true" />
+            <tx:method name="get*" propagation="SUPPORTS" read-only="true" />
+            <tx:method name="query*" propagation="SUPPORTS" read-only="true" />
+        </tx:attributes>
+    </tx:advice>
     <mvc:annotation-driven/>
 
 </beans>

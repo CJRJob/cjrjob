@@ -127,4 +127,12 @@
       job_seeker_id = #{jobSeekerId,jdbcType=INTEGER}
     where feedback_info_id = #{feedbackInfoId,jdbcType=INTEGER}
   </update>
+  <select id="selectByUserId" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from feedback_info
+    where job_seeker_id = #{jobSeekerId,jdbcType=INTEGER}
+  </select>
 </mapper>

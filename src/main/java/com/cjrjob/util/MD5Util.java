@@ -58,7 +58,7 @@ public class MD5Util {
             "6", "7", "8", "9", "UserServiceImpl", "b", "c", "d", "e", "f"};
 
     public static void main(String[] args) {
-        String s = MD5EncodeUtf8("xiaobao");
+        String s = MD5EncodeUtf8("xiaoming");
         System.out.println(s);
     }
 

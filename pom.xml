@@ -274,9 +274,8 @@
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
-      <version>6.0.6</version>
+      <version>5.1.6</version>
     </dependency>
-
     <!--spring支持-->
     <dependency>
       <groupId>org.springframework</groupId>
@@ -311,15 +310,43 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.1</version>
         <configuration>
-          <source>1.7</source>
-          <target>1.7</target>
+          <source>1.8</source>
+          <target>1.8</target>
           <encoding>UTF-8</encoding>
           <verbose>true</verbose>
           <fork>true</fork>
-          <executable>${JAVA8_HOME}/bin/javac</executable>
+          <!--<executable>${JAVA8_HOME}/bin/javac</executable>-->
           <compilerArguments>
             <extdirs>${project.basedir}/src/main/webapp/WEB-INF/lib</extdirs>
           </compilerArguments>
+        </configuration>
+      </plugin>
+   <!--   <plugin>
+         <groupId>org.apache.tomcat.maven</groupId>
+         <artifactId>tomcat7-maven-plugin</artifactId>
+        <version>2.1</version>
+        <configuration>
+          <port>8080</port>
+          <path>/</path>
+        </configuration>
+      </plugin>-->
+      <plugin>
+        <groupId>org.mortbay.jetty</groupId>
+        <artifactId>jetty-maven-plugin</artifactId>
+        <version>8.1.9.v20130131</version>
+        <configuration>
+          <stopPort>9988</stopPort>
+          <stopKey>foo</stopKey>
+          <scanIntervalSeconds>5</scanIntervalSeconds>
+          <connectors>
+            <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
+              <port>8010</port>
+              <maxIdleTime>60000</maxIdleTime>
+            </connector>
+          </connectors>
+          <webAppConfig>
+            <contextPath>/</contextPath>
+          </webAppConfig>
         </configuration>
       </plugin>
     </plugins>
