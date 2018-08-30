@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cjrjob.dao.SeekerMapper" >
+  <resultMap id="BaseResultMap" type="com.cjrjob.pojo.Seeker" >
+    <constructor >
+      <idArg column="job_seeker_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="username" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="password" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="email" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="role" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="reg_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="verify_code" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="YN" jdbcType="TINYINT" javaType="java.lang.Byte" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    job_seeker_id, username, password, email, role, reg_time, verify_code, YN
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from job_seeker
+    where job_seeker_id = #{jobSeekerId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from job_seeker
+    where job_seeker_id = #{jobSeekerId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cjrjob.pojo.Seeker" >
+    insert into job_seeker (job_seeker_id, username, password, 
+      email, role, reg_time, 
+      verify_code, YN)
+    values (#{jobSeekerId,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{role,jdbcType=CHAR}, #{regTime,jdbcType=TIMESTAMP}, 
+      #{verifyCode,jdbcType=VARCHAR}, #{yn,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cjrjob.pojo.Seeker" >
+    insert into job_seeker
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="jobSeekerId != null" >
+        job_seeker_id,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="role != null" >
+        role,
+      </if>
+      <if test="regTime != null" >
+        reg_time,
+      </if>
+      <if test="verifyCode != null" >
+        verify_code,
+      </if>
+      <if test="yn != null" >
+        YN,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="jobSeekerId != null" >
+        #{jobSeekerId,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null" >
+        #{role,jdbcType=CHAR},
+      </if>
+      <if test="regTime != null" >
+        #{regTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="verifyCode != null" >
+        #{verifyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="yn != null" >
+        #{yn,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cjrjob.pojo.Seeker" >
+    update job_seeker
+    <set >
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null" >
+        role = #{role,jdbcType=CHAR},
+      </if>
+      <if test="regTime != null" >
+        reg_time = #{regTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="verifyCode != null" >
+        verify_code = #{verifyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="yn != null" >
+        YN = #{yn,jdbcType=TINYINT},
+      </if>
+    </set>
+    where job_seeker_id = #{jobSeekerId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cjrjob.pojo.Seeker" >
+    update job_seeker
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      role = #{role,jdbcType=CHAR},
+      reg_time = #{regTime,jdbcType=TIMESTAMP},
+      verify_code = #{verifyCode,jdbcType=VARCHAR},
+      YN = #{yn,jdbcType=TINYINT}
+    where job_seeker_id = #{jobSeekerId,jdbcType=INTEGER}
+  </update>
+
+  <select id="checkEmail" resultType="java.lang.Integer" parameterType="string">
+  select count(1) from job_seeker
+  where email = #{email}
+</select>
+
+  <select id="selectLogin" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from job_seeker
+    where email = #{email}
+    and password = #{password}
+  </select>
+
+  <update id="updatePasswordByEmail" parameterType="map">
+  update job_seeker
+  set password = #{password}
+  where email = #{email}
+</update>
+
+  <select id="findSeekerByEmail" parameterType="string" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from job_seeker
+    where email = #{email}
+  </select>
+
+  <select id="checkPassword" parameterType="map" resultType="int">
+  select count(1)
+  from job_seeker
+  where password = #{password}
+  and job_seeker_id = #{seekId}
+</select>
+
+</mapper>
