@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cjrjob.dao.JobFullInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.cjrjob.pojo.JobFullInfo" >
+    <constructor >
+      <idArg column="job_full_info_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="title" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="money" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="welfare" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="demand_education" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="demand_experience" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="demand_gender" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="demand_age" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="job_location" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="people_num" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="job_kind_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="job_city_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="job_recruiter_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.cjrjob.pojo.JobFullInfo" >
+    <constructor >
+      <idArg column="job_full_info_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="title" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="money" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="welfare" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="demand_education" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="demand_experience" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="demand_gender" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="demand_age" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="job_location" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="people_num" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="job_kind_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="job_city_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="job_recruiter_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="job_content" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    job_full_info_id, title, money, create_time, welfare, demand_education, demand_experience, 
+    demand_gender, demand_age, job_location, people_num, job_kind_id, job_city_id, job_recruiter_id
+  </sql>
+  <sql id="Blob_Column_List" >
+    job_content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from job_full_info
+    where job_full_info_id = #{jobFullInfoId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from job_full_info
+    where job_full_info_id = #{jobFullInfoId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cjrjob.pojo.JobFullInfo" >
+    insert into job_full_info (job_full_info_id, title, money, 
+      create_time, welfare, demand_education, 
+      demand_experience, demand_gender, demand_age, 
+      job_location, people_num, job_kind_id, 
+      job_city_id, job_recruiter_id, job_content
+      )
+    values (#{jobFullInfoId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{money,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{welfare,jdbcType=VARCHAR}, #{demandEducation,jdbcType=VARCHAR}, 
+      #{demandExperience,jdbcType=VARCHAR}, #{demandGender,jdbcType=CHAR}, #{demandAge,jdbcType=VARCHAR}, 
+      #{jobLocation,jdbcType=VARCHAR}, #{peopleNum,jdbcType=VARCHAR}, #{jobKindId,jdbcType=INTEGER}, 
+      #{jobCityId,jdbcType=INTEGER}, #{jobRecruiterId,jdbcType=INTEGER}, #{jobContent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cjrjob.pojo.JobFullInfo" >
+    insert into job_full_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="jobFullInfoId != null" >
+        job_full_info_id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="welfare != null" >
+        welfare,
+      </if>
+      <if test="demandEducation != null" >
+        demand_education,
+      </if>
+      <if test="demandExperience != null" >
+        demand_experience,
+      </if>
+      <if test="demandGender != null" >
+        demand_gender,
+      </if>
+      <if test="demandAge != null" >
+        demand_age,
+      </if>
+      <if test="jobLocation != null" >
+        job_location,
+      </if>
+      <if test="peopleNum != null" >
+        people_num,
+      </if>
+      <if test="jobKindId != null" >
+        job_kind_id,
+      </if>
+      <if test="jobCityId != null" >
+        job_city_id,
+      </if>
+      <if test="jobRecruiterId != null" >
+        job_recruiter_id,
+      </if>
+      <if test="jobContent != null" >
+        job_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="jobFullInfoId != null" >
+        #{jobFullInfoId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="welfare != null" >
+        #{welfare,jdbcType=VARCHAR},
+      </if>
+      <if test="demandEducation != null" >
+        #{demandEducation,jdbcType=VARCHAR},
+      </if>
+      <if test="demandExperience != null" >
+        #{demandExperience,jdbcType=VARCHAR},
+      </if>
+      <if test="demandGender != null" >
+        #{demandGender,jdbcType=CHAR},
+      </if>
+      <if test="demandAge != null" >
+        #{demandAge,jdbcType=VARCHAR},
+      </if>
+      <if test="jobLocation != null" >
+        #{jobLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="peopleNum != null" >
+        #{peopleNum,jdbcType=VARCHAR},
+      </if>
+      <if test="jobKindId != null" >
+        #{jobKindId,jdbcType=INTEGER},
+      </if>
+      <if test="jobCityId != null" >
+        #{jobCityId,jdbcType=INTEGER},
+      </if>
+      <if test="jobRecruiterId != null" >
+        #{jobRecruiterId,jdbcType=INTEGER},
+      </if>
+      <if test="jobContent != null" >
+        #{jobContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cjrjob.pojo.JobFullInfo" >
+    update job_full_info
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="welfare != null" >
+        welfare = #{welfare,jdbcType=VARCHAR},
+      </if>
+      <if test="demandEducation != null" >
+        demand_education = #{demandEducation,jdbcType=VARCHAR},
+      </if>
+      <if test="demandExperience != null" >
+        demand_experience = #{demandExperience,jdbcType=VARCHAR},
+      </if>
+      <if test="demandGender != null" >
+        demand_gender = #{demandGender,jdbcType=CHAR},
+      </if>
+      <if test="demandAge != null" >
+        demand_age = #{demandAge,jdbcType=VARCHAR},
+      </if>
+      <if test="jobLocation != null" >
+        job_location = #{jobLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="peopleNum != null" >
+        people_num = #{peopleNum,jdbcType=VARCHAR},
+      </if>
+      <if test="jobKindId != null" >
+        job_kind_id = #{jobKindId,jdbcType=INTEGER},
+      </if>
+      <if test="jobCityId != null" >
+        job_city_id = #{jobCityId,jdbcType=INTEGER},
+      </if>
+      <if test="jobRecruiterId != null" >
+        job_recruiter_id = #{jobRecruiterId,jdbcType=INTEGER},
+      </if>
+      <if test="jobContent != null" >
+        job_content = #{jobContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where job_full_info_id = #{jobFullInfoId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.cjrjob.pojo.JobFullInfo" >
+    update job_full_info
+    set title = #{title,jdbcType=VARCHAR},
+      money = #{money,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      welfare = #{welfare,jdbcType=VARCHAR},
+      demand_education = #{demandEducation,jdbcType=VARCHAR},
+      demand_experience = #{demandExperience,jdbcType=VARCHAR},
+      demand_gender = #{demandGender,jdbcType=CHAR},
+      demand_age = #{demandAge,jdbcType=VARCHAR},
+      job_location = #{jobLocation,jdbcType=VARCHAR},
+      people_num = #{peopleNum,jdbcType=VARCHAR},
+      job_kind_id = #{jobKindId,jdbcType=INTEGER},
+      job_city_id = #{jobCityId,jdbcType=INTEGER},
+      job_recruiter_id = #{jobRecruiterId,jdbcType=INTEGER},
+      job_content = #{jobContent,jdbcType=LONGVARCHAR}
+    where job_full_info_id = #{jobFullInfoId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cjrjob.pojo.JobFullInfo" >
+    update job_full_info
+    set title = #{title,jdbcType=VARCHAR},
+      money = #{money,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      welfare = #{welfare,jdbcType=VARCHAR},
+      demand_education = #{demandEducation,jdbcType=VARCHAR},
+      demand_experience = #{demandExperience,jdbcType=VARCHAR},
+      demand_gender = #{demandGender,jdbcType=CHAR},
+      demand_age = #{demandAge,jdbcType=VARCHAR},
+      job_location = #{jobLocation,jdbcType=VARCHAR},
+      people_num = #{peopleNum,jdbcType=VARCHAR},
+      job_kind_id = #{jobKindId,jdbcType=INTEGER},
+      job_city_id = #{jobCityId,jdbcType=INTEGER},
+      job_recruiter_id = #{jobRecruiterId,jdbcType=INTEGER}
+    where job_full_info_id = #{jobFullInfoId,jdbcType=INTEGER}
+  </update>
+</mapper>

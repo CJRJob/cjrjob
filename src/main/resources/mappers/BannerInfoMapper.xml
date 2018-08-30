@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cjrjob.dao.BannerInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.cjrjob.pojo.BannerInfo" >
+    <constructor >
+      <idArg column="banner_info_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="img_URI" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="img_content" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    banner_info_id, img_URI, img_content, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from banner_info
+    where banner_info_id = #{bannerInfoId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from banner_info
+    where banner_info_id = #{bannerInfoId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cjrjob.pojo.BannerInfo" >
+    insert into banner_info (banner_info_id, img_URI, img_content, 
+      create_time)
+    values (#{bannerInfoId,jdbcType=INTEGER}, #{imgUri,jdbcType=VARCHAR}, #{imgContent,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cjrjob.pojo.BannerInfo" >
+    insert into banner_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="bannerInfoId != null" >
+        banner_info_id,
+      </if>
+      <if test="imgUri != null" >
+        img_URI,
+      </if>
+      <if test="imgContent != null" >
+        img_content,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="bannerInfoId != null" >
+        #{bannerInfoId,jdbcType=INTEGER},
+      </if>
+      <if test="imgUri != null" >
+        #{imgUri,jdbcType=VARCHAR},
+      </if>
+      <if test="imgContent != null" >
+        #{imgContent,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cjrjob.pojo.BannerInfo" >
+    update banner_info
+    <set >
+      <if test="imgUri != null" >
+        img_URI = #{imgUri,jdbcType=VARCHAR},
+      </if>
+      <if test="imgContent != null" >
+        img_content = #{imgContent,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where banner_info_id = #{bannerInfoId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cjrjob.pojo.BannerInfo" >
+    update banner_info
+    set img_URI = #{imgUri,jdbcType=VARCHAR},
+      img_content = #{imgContent,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where banner_info_id = #{bannerInfoId,jdbcType=INTEGER}
+  </update>
+</mapper>

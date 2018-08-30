@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cjrjob.dao.RecruiterMapper" >
+  <resultMap id="BaseResultMap" type="com.cjrjob.pojo.Recruiter" >
+    <constructor >
+      <idArg column="job_recruiter_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="job_recruiter_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="field" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="scale" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="nature" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="introduction" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="logoURI" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="location" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    job_recruiter_id, job_recruiter_name, field, scale, nature, introduction, logoURI, 
+    location
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from job_recruiter
+    where job_recruiter_id = #{jobRecruiterId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from job_recruiter
+    where job_recruiter_id = #{jobRecruiterId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cjrjob.pojo.Recruiter" >
+    insert into job_recruiter (job_recruiter_id, job_recruiter_name, 
+      field, scale, nature, 
+      introduction, logoURI, location
+      )
+    values (#{jobRecruiterId,jdbcType=INTEGER}, #{jobRecruiterName,jdbcType=VARCHAR}, 
+      #{field,jdbcType=VARCHAR}, #{scale,jdbcType=VARCHAR}, #{nature,jdbcType=VARCHAR}, 
+      #{introduction,jdbcType=VARCHAR}, #{logouri,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cjrjob.pojo.Recruiter" >
+    insert into job_recruiter
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="jobRecruiterId != null" >
+        job_recruiter_id,
+      </if>
+      <if test="jobRecruiterName != null" >
+        job_recruiter_name,
+      </if>
+      <if test="field != null" >
+        field,
+      </if>
+      <if test="scale != null" >
+        scale,
+      </if>
+      <if test="nature != null" >
+        nature,
+      </if>
+      <if test="introduction != null" >
+        introduction,
+      </if>
+      <if test="logouri != null" >
+        logoURI,
+      </if>
+      <if test="location != null" >
+        location,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="jobRecruiterId != null" >
+        #{jobRecruiterId,jdbcType=INTEGER},
+      </if>
+      <if test="jobRecruiterName != null" >
+        #{jobRecruiterName,jdbcType=VARCHAR},
+      </if>
+      <if test="field != null" >
+        #{field,jdbcType=VARCHAR},
+      </if>
+      <if test="scale != null" >
+        #{scale,jdbcType=VARCHAR},
+      </if>
+      <if test="nature != null" >
+        #{nature,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null" >
+        #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="logouri != null" >
+        #{logouri,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null" >
+        #{location,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cjrjob.pojo.Recruiter" >
+    update job_recruiter
+    <set >
+      <if test="jobRecruiterName != null" >
+        job_recruiter_name = #{jobRecruiterName,jdbcType=VARCHAR},
+      </if>
+      <if test="field != null" >
+        field = #{field,jdbcType=VARCHAR},
+      </if>
+      <if test="scale != null" >
+        scale = #{scale,jdbcType=VARCHAR},
+      </if>
+      <if test="nature != null" >
+        nature = #{nature,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null" >
+        introduction = #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="logouri != null" >
+        logoURI = #{logouri,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null" >
+        location = #{location,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where job_recruiter_id = #{jobRecruiterId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cjrjob.pojo.Recruiter" >
+    update job_recruiter
+    set job_recruiter_name = #{jobRecruiterName,jdbcType=VARCHAR},
+      field = #{field,jdbcType=VARCHAR},
+      scale = #{scale,jdbcType=VARCHAR},
+      nature = #{nature,jdbcType=VARCHAR},
+      introduction = #{introduction,jdbcType=VARCHAR},
+      logoURI = #{logouri,jdbcType=VARCHAR},
+      location = #{location,jdbcType=VARCHAR}
+    where job_recruiter_id = #{jobRecruiterId,jdbcType=INTEGER}
+  </update>
+</mapper>
