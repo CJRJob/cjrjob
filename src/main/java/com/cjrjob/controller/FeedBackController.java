@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
 
-
+/**
+ * 用户反馈接口
+ */
 @RestController
 @RequestMapping("/manage/user")
 public class FeedBackController {

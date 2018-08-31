@@ -17,8 +17,8 @@ public class IFeedBackServiceImpl implements IFeedBackService {
     public ServerResponse<FeedbackInfo> selectByUserId(Integer jobSeekerId) {
 
         FeedbackInfo feedbackInfo = feedbackInfoMapper.selectByUserId(jobSeekerId);
-        if (feedbackInfo == null) {
 
+        if (feedbackInfo == null) {
             return ServerResponse.createByErrorMessage("用户反馈信息为空");
         }
         return ServerResponse.createBySuccess(feedbackInfo);
