@@ -12,9 +12,9 @@
 
     <appender name="cjrjob" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!--<File>d:/cjrjoblog/cjrjob.log</File>-->
-        <File>G:/JAVA/apache-tomcat-9.0.0.M21/logs/cjrjob.log</File>
+        <File>${JAVA8_HOME}/logs/cjrjob.log</File>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>G:/JAVA/apache-tomcat-9.0.0.M21/logs/cjrjob.log.%d{yyyy-MM-dd}.gz</fileNamePattern>
+            <fileNamePattern>${JAVA8_HOME}/logs/cjrjob.log.%d{yyyy-MM-dd}.gz</fileNamePattern>
             <append>true</append>
             <maxHistory>10</maxHistory>
         </rollingPolicy>
@@ -26,9 +26,9 @@
 
     <appender name="error" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!--<File>d:/cjrjoblog/error.log</File>-->
-        <File>G:/JAVA/apache-tomcat-9.0.0.M21/logs/cjrjob.log</File>
+        <File>${JAVA8_HOME}/logs/cjrjob.log</File>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>G:/JAVA/apache-tomcat-9.0.0.M21/logs/cjrjob.log.%d{yyyy-MM-dd}.gz</fileNamePattern>
+            <fileNamePattern>${JAVA8_HOME}/logs/cjrjob.log.%d{yyyy-MM-dd}.gz</fileNamePattern>
             <!--<fileNamePattern>d:/cjrjoblog/error.log.%d{yyyy-MM-dd}.gz</fileNamePattern>-->
             <append>true</append>
             <maxHistory>10</maxHistory>

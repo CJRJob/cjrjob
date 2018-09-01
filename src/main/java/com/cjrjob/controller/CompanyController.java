@@ -22,7 +22,7 @@ public class CompanyController {
     //添加公司
     @RequestMapping("add.do")
     @ResponseBody
-    public ServerResponse<String> addCompany(@RequestBody Recruiter recruiter) {
+    public ServerResponse<String> addCompany(Recruiter recruiter) {
         return iCompanyService.addCompany(recruiter);
     }
 
