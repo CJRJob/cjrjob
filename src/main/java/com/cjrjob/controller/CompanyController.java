@@ -7,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -26,10 +25,17 @@ public class CompanyController {
         return iCompanyService.addCompany(recruiter);
     }
 
-    //查询公司信息
+    //根据id查询公司信息
     @RequestMapping("jobDetail.do")
     @ResponseBody
     public ServerResponse showCompanyInfo(int id) {
         return iCompanyService.showCompanyInfo(id);
+    }
+
+    //分页查询公司信息
+    @RequestMapping("selectAllByPage.do")
+    @ResponseBody
+    public ServerResponse showCompanyInfoByPage(int currentPage, int pageSize) {
+        return iCompanyService.showCompanyInfoByPage(currentPage, pageSize);
     }
 }

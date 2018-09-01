@@ -18,11 +18,23 @@
     location
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from job_recruiter
     where job_recruiter_id = #{jobRecruiterId,jdbcType=INTEGER}
   </select>
+
+
+  <select id="selectByPage" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select
+    <include refid="Base_Column_List" />
+    from job_recruiter
+    limit  #{currentPage} , #{pageSize}
+  </select>
+
+
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from job_recruiter
     where job_recruiter_id = #{jobRecruiterId,jdbcType=INTEGER}

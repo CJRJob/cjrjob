@@ -8,4 +8,6 @@ public interface ICompanyService {
     ServerResponse<String> addCompany(Recruiter recruiter);
 
     ServerResponse showCompanyInfo(int id);
+
+    ServerResponse showCompanyInfoByPage(int currentPage, int pageSize);
 }
