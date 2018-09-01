@@ -40,9 +40,6 @@
   <insert id="insertSelective" parameterType="com.cjrjob.pojo.Recruiter" >
     insert into job_recruiter
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="jobRecruiterId != null" >
-        job_recruiter_id,
-      </if>
       <if test="jobRecruiterName != null" >
         job_recruiter_name,
       </if>
@@ -66,9 +63,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="jobRecruiterId != null" >
-        #{jobRecruiterId,jdbcType=INTEGER},
-      </if>
       <if test="jobRecruiterName != null" >
         #{jobRecruiterName,jdbcType=VARCHAR},
       </if>
