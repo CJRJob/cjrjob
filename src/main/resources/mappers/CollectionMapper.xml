@@ -19,10 +19,11 @@
     from job_collection
     where job_collection = #{jobCollection,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from job_collection
+  <update id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    update job_collection
+    set YN = 1
     where job_collection = #{jobCollection,jdbcType=INTEGER}
-  </delete>
+  </update>
   <insert id="insert" parameterType="com.cjrjob.pojo.Collection" >
     insert into job_collection (job_collection, create_time, job_seeker_id, 
       job_full_info, YN)
@@ -92,4 +93,13 @@
       YN = #{yn,jdbcType=TINYINT}
     where job_collection = #{jobCollection,jdbcType=INTEGER}
   </update>
+  <select id="findBy" parameterType="int" resultType="hashmap">
+  	SELECT
+  	c.job_collection id, UNIX_TIMESTAMP(c.create_time)
+  	create_time,j.title,r.job_recruiter_name jobRecruiterName
+  	from job_collection c
+  	join job_full_info j on j.job_full_info_id = c.job_full_info
+  	join job_recruiter r on r.job_recruiter_id = j.job_recruiter_id
+  	where c.job_seeker_id = #{jobSeekerId} and c.YN = 0
+  </select>
 </mapper>
