@@ -23,7 +23,7 @@ public class CompanyController {
     @RequestMapping("add.do")
     @ResponseBody
     public ServerResponse<String> addCompany(MultipartFile file, Recruiter recruiter) {
-        return iCompanyService.addCompany(file, recruiter);
+        return iCompanyService.addCompany(file, recruiter); 
     }
 
     //根据id查询公司信息
