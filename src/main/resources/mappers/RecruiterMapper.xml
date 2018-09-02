@@ -11,19 +11,34 @@
       <arg column="introduction" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="logoURI" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="location" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="YN" jdbcType="TINYINT" javaType="java.lang.Byte" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
     job_recruiter_id, job_recruiter_name, field, scale, nature, introduction, logoURI, 
-    location, YN
+    location
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from job_recruiter
     where job_recruiter_id = #{jobRecruiterId,jdbcType=INTEGER}
   </select>
+
+
+  <select id="selectByPage" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select
+    <include refid="Base_Column_List" />
+    from job_recruiter
+    limit  #{currentPage} , #{pageSize}
+  </select>
+
+  <select id="select" resultType="java.lang.Integer" >
+    select
+    count(*)
+    from job_recruiter
+  </select>
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from job_recruiter
     where job_recruiter_id = #{jobRecruiterId,jdbcType=INTEGER}
@@ -31,19 +46,16 @@
   <insert id="insert" parameterType="com.cjrjob.pojo.Recruiter" >
     insert into job_recruiter (job_recruiter_id, job_recruiter_name, 
       field, scale, nature, 
-      introduction, logoURI, location, 
-      YN)
+      introduction, logoURI, location
+      )
     values (#{jobRecruiterId,jdbcType=INTEGER}, #{jobRecruiterName,jdbcType=VARCHAR}, 
       #{field,jdbcType=VARCHAR}, #{scale,jdbcType=VARCHAR}, #{nature,jdbcType=VARCHAR}, 
-      #{introduction,jdbcType=VARCHAR}, #{logouri,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR}, 
-      #{yn,jdbcType=TINYINT})
+      #{introduction,jdbcType=VARCHAR}, #{logouri,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.cjrjob.pojo.Recruiter" >
     insert into job_recruiter
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="jobRecruiterId != null" >
-        job_recruiter_id,
-      </if>
       <if test="jobRecruiterName != null" >
         job_recruiter_name,
       </if>
@@ -65,14 +77,8 @@
       <if test="location != null" >
         location,
       </if>
-      <if test="yn != null" >
-        YN,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="jobRecruiterId != null" >
-        #{jobRecruiterId,jdbcType=INTEGER},
-      </if>
       <if test="jobRecruiterName != null" >
         #{jobRecruiterName,jdbcType=VARCHAR},
       </if>
@@ -93,9 +99,6 @@
       </if>
       <if test="location != null" >
         #{location,jdbcType=VARCHAR},
-      </if>
-      <if test="yn != null" >
-        #{yn,jdbcType=TINYINT},
       </if>
     </trim>
   </insert>
@@ -123,9 +126,6 @@
       <if test="location != null" >
         location = #{location,jdbcType=VARCHAR},
       </if>
-      <if test="yn != null" >
-        YN = #{yn,jdbcType=TINYINT},
-      </if>
     </set>
     where job_recruiter_id = #{jobRecruiterId,jdbcType=INTEGER}
   </update>
@@ -137,8 +137,7 @@
       nature = #{nature,jdbcType=VARCHAR},
       introduction = #{introduction,jdbcType=VARCHAR},
       logoURI = #{logouri,jdbcType=VARCHAR},
-      location = #{location,jdbcType=VARCHAR},
-      YN = #{yn,jdbcType=TINYINT}
+      location = #{location,jdbcType=VARCHAR}
     where job_recruiter_id = #{jobRecruiterId,jdbcType=INTEGER}
   </update>
 </mapper>
