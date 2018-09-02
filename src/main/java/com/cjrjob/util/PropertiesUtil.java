@@ -22,7 +22,7 @@ public class PropertiesUtil {
 
     // 优先级最高 只执行一次  在类被加载的时候执行
     static {
-        String fileName = "mmall.properties";
+        String fileName = "cjrjob.properties";
         props = new Properties();
         try {
             props.load(new InputStreamReader(PropertiesUtil.class.getClassLoader().getResourceAsStream(fileName)));

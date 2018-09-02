@@ -32,7 +32,11 @@
     limit  #{currentPage} , #{pageSize}
   </select>
 
-
+  <select id="select" resultType="java.lang.Integer" >
+    select
+    count(*)
+    from job_recruiter
+  </select>
 
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/manage/company")
@@ -21,8 +22,8 @@ public class CompanyController {
     //添加公司
     @RequestMapping("add.do")
     @ResponseBody
-    public ServerResponse<String> addCompany(Recruiter recruiter) {
-        return iCompanyService.addCompany(recruiter);
+    public ServerResponse<String> addCompany(MultipartFile file, Recruiter recruiter) {
+        return iCompanyService.addCompany(file, recruiter);
     }
 
     //根据id查询公司信息
@@ -30,6 +31,13 @@ public class CompanyController {
     @ResponseBody
     public ServerResponse showCompanyInfo(int id) {
         return iCompanyService.showCompanyInfo(id);
+    }
+
+    //分页查询公司信息-第一次查询，返回页面数量
+    @RequestMapping("selectAllFirst.do")
+    @ResponseBody
+    public ServerResponse showCompanyInfoFirst(int pageSize) {
+        return iCompanyService.showCompanyInfoFirst(pageSize);
     }
 
     //分页查询公司信息

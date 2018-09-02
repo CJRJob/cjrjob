@@ -13,6 +13,9 @@ public interface RecruiterMapper {
     //分页查询
     List<Recruiter> selectByPage(Map<String, Integer> map);
 
+    //查询所有公司的数量
+    Integer select();
+
     //插入
     int insertSelective(Recruiter record);
 
