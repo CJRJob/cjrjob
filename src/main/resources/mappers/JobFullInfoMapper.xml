@@ -37,13 +37,18 @@
       <arg column="job_city_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="job_recruiter_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="YN" jdbcType="TINYINT" javaType="java.lang.Byte" />
+=======
+>>>>>>> 739e7bd12d5340eaef71e9ac7584fa6e1004e194
       <arg column="job_content" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    job_full_info_id, title, money, create_time, welfare, demand_education, demand_experience, 
+    job_full_info_id, title, money, create_time, welfare, demand_education, demand_experience,
     demand_gender, demand_age, job_location, people_num, job_kind_id, job_city_id, job_recruiter_id, 
     YN
+=======
+    demand_gender, demand_age, job_location, people_num, job_kind_id, job_city_id, job_recruiter_id
+>>>>>>> 739e7bd12d5340eaef71e9ac7584fa6e1004e194
   </sql>
   <sql id="Blob_Column_List" >
     job_content
@@ -64,15 +69,22 @@
     insert into job_full_info (job_full_info_id, title, money, 
       create_time, welfare, demand_education, 
       demand_experience, demand_gender, demand_age, 
-      job_location, people_num, job_kind_id, 
+      job_location, people_num, job_kind_id,
       job_city_id, job_recruiter_id, YN, 
       job_content)
+=======
+      job_city_id, job_recruiter_id, job_content
+      )
+>>>>>>> 739e7bd12d5340eaef71e9ac7584fa6e1004e194
     values (#{jobFullInfoId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{money,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{welfare,jdbcType=VARCHAR}, #{demandEducation,jdbcType=VARCHAR}, 
       #{demandExperience,jdbcType=VARCHAR}, #{demandGender,jdbcType=CHAR}, #{demandAge,jdbcType=VARCHAR}, 
-      #{jobLocation,jdbcType=VARCHAR}, #{peopleNum,jdbcType=VARCHAR}, #{jobKindId,jdbcType=INTEGER}, 
+      #{jobLocation,jdbcType=VARCHAR}, #{peopleNum,jdbcType=VARCHAR}, #{jobKindId,jdbcType=INTEGER},
       #{jobCityId,jdbcType=INTEGER}, #{jobRecruiterId,jdbcType=INTEGER}, #{yn,jdbcType=TINYINT}, 
       #{jobContent,jdbcType=LONGVARCHAR})
+=======
+      #{jobCityId,jdbcType=INTEGER}, #{jobRecruiterId,jdbcType=INTEGER}, #{jobContent,jdbcType=LONGVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.cjrjob.pojo.JobFullInfo" >
     insert into job_full_info
@@ -122,6 +134,8 @@
       <if test="yn != null" >
         YN,
       </if>
+=======
+>>>>>>> 739e7bd12d5340eaef71e9ac7584fa6e1004e194
       <if test="jobContent != null" >
         job_content,
       </if>
@@ -172,6 +186,8 @@
       <if test="yn != null" >
         #{yn,jdbcType=TINYINT},
       </if>
+=======
+>>>>>>> 739e7bd12d5340eaef71e9ac7584fa6e1004e194
       <if test="jobContent != null" >
         #{jobContent,jdbcType=LONGVARCHAR},
       </if>
@@ -222,6 +238,8 @@
       <if test="yn != null" >
         YN = #{yn,jdbcType=TINYINT},
       </if>
+=======
+>>>>>>> 739e7bd12d5340eaef71e9ac7584fa6e1004e194
       <if test="jobContent != null" >
         job_content = #{jobContent,jdbcType=LONGVARCHAR},
       </if>
@@ -244,6 +262,8 @@
       job_city_id = #{jobCityId,jdbcType=INTEGER},
       job_recruiter_id = #{jobRecruiterId,jdbcType=INTEGER},
       YN = #{yn,jdbcType=TINYINT},
+=======
+>>>>>>> 739e7bd12d5340eaef71e9ac7584fa6e1004e194
       job_content = #{jobContent,jdbcType=LONGVARCHAR}
     where job_full_info_id = #{jobFullInfoId,jdbcType=INTEGER}
   </update>
@@ -263,6 +283,7 @@
       job_city_id = #{jobCityId,jdbcType=INTEGER},
       job_recruiter_id = #{jobRecruiterId,jdbcType=INTEGER},
       YN = #{yn,jdbcType=TINYINT}
+      job_recruiter_id = #{jobRecruiterId,jdbcType=INTEGER}
     where job_full_info_id = #{jobFullInfoId,jdbcType=INTEGER}
   </update>
 </mapper>

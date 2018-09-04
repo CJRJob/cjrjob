@@ -24,11 +24,19 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/user/")
 public class UserController {
 
+<<<<<<< HEAD
     @Autowired
     private IUserService iUserService;
 
     // 登录
     @RequestMapping(value = "login.do", method = RequestMethod.POST)
+=======
+    @Autowired(required=true)
+    private IUserService iUserService;
+
+    // 登录
+    @RequestMapping(value = "login", method = RequestMethod.POST)
+>>>>>>> 739e7bd12d5340eaef71e9ac7584fa6e1004e194
     @ResponseBody
     public ServerResponse<Seeker> login(String email, String password, HttpSession session){
 
@@ -55,7 +63,11 @@ public class UserController {
         return ServerResponse.createBySuccess();
     }
 
+<<<<<<< HEAD
     @RequestMapping("get_seeker_info.do")
+=======
+    @RequestMapping("get_seeker_info")
+>>>>>>> 739e7bd12d5340eaef71e9ac7584fa6e1004e194
     @ResponseBody
     // 获取用户登录信息
     public ServerResponse getSeekerInfo(HttpSession session){
@@ -118,7 +130,10 @@ public class UserController {
 
     @RequestMapping("seeker_info_detail.do")
     @ResponseBody
+<<<<<<< HEAD
     // 获取用户当前详细信息
+=======
+>>>>>>> 739e7bd12d5340eaef71e9ac7584fa6e1004e194
     public ServerResponse<SeekerInfo> seekerInfoDetail(HttpSession session){
         Seeker currentUser = (Seeker) session.getAttribute(Const.CURRENT_USER);
         if (currentUser == null){

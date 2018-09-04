@@ -49,8 +49,14 @@ public class UserServiceImpl implements IUserService {
             return ServerResponse.createByErrorMessage("邮箱不存在");
         }
         // 密码登录MD5
+<<<<<<< HEAD
         String md5Password = MD5Util.MD5EncodeUtf8(password);
         Seeker seeker = seekerMapper.selectLogin(email, md5Password);
+=======
+        //String md5Password = MD5Util.MD5EncodeUtf8(password);
+        System.out.println(password);
+        Seeker seeker = seekerMapper.selectLogin(email, password);
+>>>>>>> 739e7bd12d5340eaef71e9ac7584fa6e1004e194
         if(seeker == null){
             return ServerResponse.createByErrorMessage("密码错误");
         }
@@ -124,7 +130,11 @@ public class UserServiceImpl implements IUserService {
             updateSeeker.setRegTime(seeker.getRegTime());
             updateSeeker.setRole(seeker.getRole());
             updateSeeker.setPassword(seeker.getPassword());
+<<<<<<< HEAD
             updateSeeker.setVerifyCode(code);
+=======
+            updateSeeker.setVerifycode(code);
+>>>>>>> 739e7bd12d5340eaef71e9ac7584fa6e1004e194
             int updateCount = seekerMapper.updateByPrimaryKeySelective(updateSeeker);
             if (updateCount == 0){
                 return ServerResponse.createByErrorMessage("验证码更新失败");
@@ -148,7 +158,11 @@ public class UserServiceImpl implements IUserService {
         }
         // 获取验证码
         Seeker seeker = seekerMapper.findSeekerByEmail(email);
+<<<<<<< HEAD
         int verifyCode = seeker.getVerifyCode();
+=======
+        int verifyCode = seeker.getVerifycode();
+>>>>>>> 739e7bd12d5340eaef71e9ac7584fa6e1004e194
 
         if (code != verifyCode){
             return ServerResponse.createByErrorMessage("验证码错误");

@@ -1,7 +1,7 @@
 package com.cjrjob.service.lmpl;
 
 import com.cjrjob.common.ServerResponse;
-import com.cjrjob.dao.RecruiterMapper;
+
 import com.cjrjob.pojo.Recruiter;
 import com.cjrjob.pojo.RecruiterDTO;
 import com.cjrjob.service.ICompanyService;
@@ -10,6 +10,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import com.cjrjob.dao.Re
 
 import java.io.File;
 import java.util.HashMap;

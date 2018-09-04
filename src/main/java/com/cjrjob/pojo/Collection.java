@@ -1,7 +1,16 @@
 package com.cjrjob.pojo;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.util.Date;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Collection {
     private Integer jobCollection;
 
@@ -13,55 +22,4 @@ public class Collection {
 
     private Byte yn;
 
-    public Collection(Integer jobCollection, Date createTime, Integer jobSeekerId, Integer jobFullInfo, Byte yn) {
-        this.jobCollection = jobCollection;
-        this.createTime = createTime;
-        this.jobSeekerId = jobSeekerId;
-        this.jobFullInfo = jobFullInfo;
-        this.yn = yn;
-    }
-
-    public Collection() {
-        super();
-    }
-
-    public Integer getJobCollection() {
-        return jobCollection;
-    }
-
-    public void setJobCollection(Integer jobCollection) {
-        this.jobCollection = jobCollection;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Integer getJobSeekerId() {
-        return jobSeekerId;
-    }
-
-    public void setJobSeekerId(Integer jobSeekerId) {
-        this.jobSeekerId = jobSeekerId;
-    }
-
-    public Integer getJobFullInfo() {
-        return jobFullInfo;
-    }
-
-    public void setJobFullInfo(Integer jobFullInfo) {
-        this.jobFullInfo = jobFullInfo;
-    }
-
-    public Byte getYn() {
-        return yn;
-    }
-
-    public void setYn(Byte yn) {
-        this.yn = yn;
-    }
 }

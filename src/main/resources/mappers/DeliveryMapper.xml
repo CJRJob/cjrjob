@@ -11,7 +11,7 @@
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    job_delivery_id, create_time, job_seeker_id, job_full_info, YN
+    job_delivery_id, create_time, job_seeker_id, job_full_info
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -24,10 +24,15 @@
     where job_delivery_id = #{jobDeliveryId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.cjrjob.pojo.Delivery" >
-    insert into job_delivery (job_delivery_id, create_time, job_seeker_id, 
+    insert into job_delivery (job_delivery_id, create_time, job_seeker_id,
       job_full_info, YN)
     values (#{jobDeliveryId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{jobSeekerId,jdbcType=INTEGER}, 
       #{jobFullInfo,jdbcType=INTEGER}, #{yn,jdbcType=TINYINT})
+=======
+      job_full_info)
+    values (#{jobDeliveryId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{jobSeekerId,jdbcType=INTEGER}, 
+      #{jobFullInfo,jdbcType=INTEGER})
+>>>>>>> 739e7bd12d5340eaef71e9ac7584fa6e1004e194
   </insert>
   <insert id="insertSelective" parameterType="com.cjrjob.pojo.Delivery" >
     insert into job_delivery
@@ -47,6 +52,8 @@
       <if test="yn != null" >
         YN,
       </if>
+=======
+>>>>>>> 739e7bd12d5340eaef71e9ac7584fa6e1004e194
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="jobDeliveryId != null" >
@@ -64,6 +71,8 @@
       <if test="yn != null" >
         #{yn,jdbcType=TINYINT},
       </if>
+=======
+>>>>>>> 739e7bd12d5340eaef71e9ac7584fa6e1004e194
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.cjrjob.pojo.Delivery" >
@@ -81,6 +90,8 @@
       <if test="yn != null" >
         YN = #{yn,jdbcType=TINYINT},
       </if>
+=======
+>>>>>>> 739e7bd12d5340eaef71e9ac7584fa6e1004e194
     </set>
     where job_delivery_id = #{jobDeliveryId,jdbcType=INTEGER}
   </update>
@@ -90,6 +101,7 @@
       job_seeker_id = #{jobSeekerId,jdbcType=INTEGER},
       job_full_info = #{jobFullInfo,jdbcType=INTEGER},
       YN = #{yn,jdbcType=TINYINT}
+      job_full_info = #{jobFullInfo,jdbcType=INTEGER}
     where job_delivery_id = #{jobDeliveryId,jdbcType=INTEGER}
   </update>
 </mapper>

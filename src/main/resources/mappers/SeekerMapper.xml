@@ -13,11 +13,12 @@
       <arg column="YN" jdbcType="TINYINT" javaType="java.lang.Byte" />
     </constructor>
   </resultMap>
+
   <sql id="Base_Column_List" >
-    job_seeker_id, username, password, email, role, reg_time, verify_code, YN
+    job_seeker_id, username, password, email, role, reg_time, verifyCode, update_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from job_seeker
     where job_seeker_id = #{jobSeekerId,jdbcType=INTEGER}
@@ -33,6 +34,13 @@
     values (#{jobSeekerId,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{role,jdbcType=CHAR}, #{regTime,jdbcType=TIMESTAMP}, 
       #{verifyCode,jdbcType=INTEGER}, #{yn,jdbcType=TINYINT})
+    insert into job_seeker (job_seeker_id, username, password,
+      email, role, reg_time, verifyCode, update_time
+      )
+    values (#{jobSeekerId,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+      #{email,jdbcType=VARCHAR}, #{role,jdbcType=CHAR}, #{regTime,jdbcType=TIMESTAMP}, #{verifycode,jdbcType=INTEGER}
+      #{updateTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.cjrjob.pojo.Seeker" >
     insert into job_seeker
@@ -60,6 +68,11 @@
       </if>
       <if test="yn != null" >
         YN,
+      <if test="verifycode != null">
+        verifyCode,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -86,6 +99,13 @@
       </if>
       <if test="yn != null" >
         #{yn,jdbcType=TINYINT},
+=======
+      <if test="verifycode != null">
+        #{verifycode,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+>>>>>>> 739e7bd12d5340eaef71e9ac7584fa6e1004e194
       </if>
     </trim>
   </insert>
@@ -112,6 +132,11 @@
       </if>
       <if test="yn != null" >
         YN = #{yn,jdbcType=TINYINT},
+      <if test="verifycode != null">
+        verifyCode = #{verifycode,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where job_seeker_id = #{jobSeekerId,jdbcType=INTEGER}
@@ -125,6 +150,8 @@
       reg_time = #{regTime,jdbcType=TIMESTAMP},
       verify_code = #{verifyCode,jdbcType=INTEGER},
       YN = #{yn,jdbcType=TINYINT}
+      verifyCode = #{verifycode,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
     where job_seeker_id = #{jobSeekerId,jdbcType=INTEGER}
   </update>
 
@@ -132,6 +159,9 @@
   select count(1) from job_seeker
   where email = #{email}
 </select>
+    select count(1) from job_seeker
+    where email = #{email}
+  </select>
 
   <select id="selectLogin" parameterType="map" resultMap="BaseResultMap">
     select
@@ -146,6 +176,10 @@
   set password = #{password}
   where email = #{email}
 </update>
+    update job_seeker
+    set password = #{password}
+    where email = #{email}
+  </update>
 
   <select id="findSeekerByEmail" parameterType="string" resultMap="BaseResultMap">
     select
@@ -160,5 +194,9 @@
   where password = #{password}
   and job_seeker_id = #{seekId}
 </select>
-
+    select count(1)
+    from job_seeker
+    where password = #{password}
+    and job_seeker_id = #{seekId}
+  </select>
 </mapper>

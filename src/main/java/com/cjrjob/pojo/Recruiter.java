@@ -1,6 +1,5 @@
 package com.cjrjob.pojo;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,7 +25,5 @@ public class Recruiter {
     private String logouri;
 
     private String location;
-
-//    private Byte yn;
 
 }

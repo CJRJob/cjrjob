@@ -1,7 +1,16 @@
 package com.cjrjob.pojo;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.util.Date;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Delivery {
     private Integer jobDeliveryId;
 
@@ -13,55 +22,5 @@ public class Delivery {
 
     private Byte yn;
 
-    public Delivery(Integer jobDeliveryId, Date createTime, Integer jobSeekerId, Integer jobFullInfo, Byte yn) {
-        this.jobDeliveryId = jobDeliveryId;
-        this.createTime = createTime;
-        this.jobSeekerId = jobSeekerId;
-        this.jobFullInfo = jobFullInfo;
-        this.yn = yn;
-    }
 
-    public Delivery() {
-        super();
-    }
-
-    public Integer getJobDeliveryId() {
-        return jobDeliveryId;
-    }
-
-    public void setJobDeliveryId(Integer jobDeliveryId) {
-        this.jobDeliveryId = jobDeliveryId;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Integer getJobSeekerId() {
-        return jobSeekerId;
-    }
-
-    public void setJobSeekerId(Integer jobSeekerId) {
-        this.jobSeekerId = jobSeekerId;
-    }
-
-    public Integer getJobFullInfo() {
-        return jobFullInfo;
-    }
-
-    public void setJobFullInfo(Integer jobFullInfo) {
-        this.jobFullInfo = jobFullInfo;
-    }
-
-    public Byte getYn() {
-        return yn;
-    }
-
-    public void setYn(Byte yn) {
-        this.yn = yn;
-    }
 }

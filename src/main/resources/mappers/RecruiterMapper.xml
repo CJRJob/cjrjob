@@ -140,4 +140,5 @@
       location = #{location,jdbcType=VARCHAR}
     where job_recruiter_id = #{jobRecruiterId,jdbcType=INTEGER}
   </update>
+
 </mapper>

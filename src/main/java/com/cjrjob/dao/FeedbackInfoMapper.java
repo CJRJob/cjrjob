@@ -16,4 +16,9 @@ public interface FeedbackInfoMapper {
     int updateByPrimaryKeyWithBLOBs(FeedbackInfo record);
 
     int updateByPrimaryKey(FeedbackInfo record);
+<<<<<<< HEAD
+=======
+
+    FeedbackInfo selectByUserId(Integer jobSeekerId);
+>>>>>>> 739e7bd12d5340eaef71e9ac7584fa6e1004e194
 }

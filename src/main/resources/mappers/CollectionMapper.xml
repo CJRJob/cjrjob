@@ -12,7 +12,8 @@
   </resultMap>
   <sql id="Base_Column_List" >
     job_collection, create_time, job_seeker_id, job_full_info, YN
-  </sql>
+   </sql>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -24,11 +25,16 @@
     where job_collection = #{jobCollection,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.cjrjob.pojo.Collection" >
-    insert into job_collection (job_collection, create_time, job_seeker_id, 
+    insert into job_collection (job_collection, create_time, job_seeker_id,
       job_full_info, YN)
     values (#{jobCollection,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{jobSeekerId,jdbcType=INTEGER}, 
       #{jobFullInfo,jdbcType=INTEGER}, #{yn,jdbcType=TINYINT})
+
+      job_full_info)
+    values (#{jobCollection,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{jobSeekerId,jdbcType=INTEGER}, 
+      #{jobFullInfo,jdbcType=INTEGER})
   </insert>
+
   <insert id="insertSelective" parameterType="com.cjrjob.pojo.Collection" >
     insert into job_collection
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -44,9 +50,11 @@
       <if test="jobFullInfo != null" >
         job_full_info,
       </if>
+
       <if test="yn != null" >
         YN,
       </if>
+
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="jobCollection != null" >
@@ -66,6 +74,7 @@
       </if>
     </trim>
   </insert>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.cjrjob.pojo.Collection" >
     update job_collection
     <set >
@@ -78,18 +87,23 @@
       <if test="jobFullInfo != null" >
         job_full_info = #{jobFullInfo,jdbcType=INTEGER},
       </if>
+
       <if test="yn != null" >
         YN = #{yn,jdbcType=TINYINT},
       </if>
     </set>
     where job_collection = #{jobCollection,jdbcType=INTEGER}
   </update>
+
   <update id="updateByPrimaryKey" parameterType="com.cjrjob.pojo.Collection" >
     update job_collection
     set create_time = #{createTime,jdbcType=TIMESTAMP},
       job_seeker_id = #{jobSeekerId,jdbcType=INTEGER},
+
       job_full_info = #{jobFullInfo,jdbcType=INTEGER},
       YN = #{yn,jdbcType=TINYINT}
+
+      job_full_info = #{jobFullInfo,jdbcType=INTEGER}
     where job_collection = #{jobCollection,jdbcType=INTEGER}
   </update>
 </mapper>
