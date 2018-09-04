@@ -15,11 +15,11 @@ public class Seeker {
 
     private Date regTime;
 
-    private String verifyCode;
+    private Integer verifyCode;
 
     private Byte yn;
 
-    public Seeker(Integer jobSeekerId, String username, String password, String email, String role, Date regTime, String verifyCode, Byte yn) {
+    public Seeker(Integer jobSeekerId, String username, String password, String email, String role, Date regTime, Integer verifyCode, Byte yn) {
         this.jobSeekerId = jobSeekerId;
         this.username = username;
         this.password = password;
@@ -82,12 +82,12 @@ public class Seeker {
         this.regTime = regTime;
     }
 
-    public String getVerifyCode() {
+    public Integer getVerifyCode() {
         return verifyCode;
     }
 
-    public void setVerifyCode(String verifyCode) {
-        this.verifyCode = verifyCode == null ? null : verifyCode.trim();
+    public void setVerifyCode(Integer verifyCode) {
+        this.verifyCode = verifyCode == null ? null : verifyCode;
     }
 
     public Byte getYn() {

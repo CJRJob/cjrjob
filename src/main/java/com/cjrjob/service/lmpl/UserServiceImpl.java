@@ -3,6 +3,10 @@ package com.cjrjob.service.lmpl;
 import com.cjrjob.common.Const;
 import com.cjrjob.common.ServerResponse;
 import com.cjrjob.common.TokenCache;
+import com.cjrjob.dao.SeekerInfoMapper;
+import com.cjrjob.dao.SeekerMapper;
+import com.cjrjob.pojo.Seeker;
+import com.cjrjob.pojo.SeekerInfo;
 import com.cjrjob.service.IUserService;
 import com.cjrjob.util.MD5Util;
 import org.apache.commons.lang3.StringUtils;
@@ -120,7 +124,7 @@ public class UserServiceImpl implements IUserService {
             updateSeeker.setRegTime(seeker.getRegTime());
             updateSeeker.setRole(seeker.getRole());
             updateSeeker.setPassword(seeker.getPassword());
-            updateSeeker.setVerifycode(code);
+            updateSeeker.setVerifyCode(code);
             int updateCount = seekerMapper.updateByPrimaryKeySelective(updateSeeker);
             if (updateCount == 0){
                 return ServerResponse.createByErrorMessage("验证码更新失败");
@@ -144,7 +148,7 @@ public class UserServiceImpl implements IUserService {
         }
         // 获取验证码
         Seeker seeker = seekerMapper.findSeekerByEmail(email);
-        int verifyCode = seeker.getVerifycode();
+        int verifyCode = seeker.getVerifyCode();
 
         if (code != verifyCode){
             return ServerResponse.createByErrorMessage("验证码错误");

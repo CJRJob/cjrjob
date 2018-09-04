@@ -1,4 +1,4 @@
-package com.cjrjob.service.impl;
+package com.cjrjob.service.lmpl;
 
 import com.cjrjob.common.ServerResponse;
 import com.cjrjob.dao.RecruiterMapper;

@@ -9,7 +9,7 @@
       <arg column="email" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="role" jdbcType="CHAR" javaType="java.lang.String" />
       <arg column="reg_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="verify_code" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="verify_code" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="YN" jdbcType="TINYINT" javaType="java.lang.Byte" />
     </constructor>
   </resultMap>
@@ -32,7 +32,7 @@
       verify_code, YN)
     values (#{jobSeekerId,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{role,jdbcType=CHAR}, #{regTime,jdbcType=TIMESTAMP}, 
-      #{verifyCode,jdbcType=VARCHAR}, #{yn,jdbcType=TINYINT})
+      #{verifyCode,jdbcType=INTEGER}, #{yn,jdbcType=TINYINT})
   </insert>
   <insert id="insertSelective" parameterType="com.cjrjob.pojo.Seeker" >
     insert into job_seeker
@@ -82,7 +82,7 @@
         #{regTime,jdbcType=TIMESTAMP},
       </if>
       <if test="verifyCode != null" >
-        #{verifyCode,jdbcType=VARCHAR},
+        #{verifyCode,jdbcType=INTEGER},
       </if>
       <if test="yn != null" >
         #{yn,jdbcType=TINYINT},
@@ -108,7 +108,7 @@
         reg_time = #{regTime,jdbcType=TIMESTAMP},
       </if>
       <if test="verifyCode != null" >
-        verify_code = #{verifyCode,jdbcType=VARCHAR},
+        verify_code = #{verifyCode,jdbcType=INTEGER},
       </if>
       <if test="yn != null" >
         YN = #{yn,jdbcType=TINYINT},
@@ -123,7 +123,7 @@
       email = #{email,jdbcType=VARCHAR},
       role = #{role,jdbcType=CHAR},
       reg_time = #{regTime,jdbcType=TIMESTAMP},
-      verify_code = #{verifyCode,jdbcType=VARCHAR},
+      verify_code = #{verifyCode,jdbcType=INTEGER},
       YN = #{yn,jdbcType=TINYINT}
     where job_seeker_id = #{jobSeekerId,jdbcType=INTEGER}
   </update>
