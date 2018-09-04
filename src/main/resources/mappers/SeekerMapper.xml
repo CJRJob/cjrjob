@@ -29,6 +29,7 @@
     where job_seeker_id = #{jobSeekerId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.cjrjob.pojo.Seeker" >
+<<<<<<< HEAD
     insert into job_seeker (job_seeker_id, username, password, 
       email, role, reg_time, 
       verify_code, YN)
@@ -41,6 +42,13 @@
     values (#{jobSeekerId,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
       #{email,jdbcType=VARCHAR}, #{role,jdbcType=CHAR}, #{regTime,jdbcType=TIMESTAMP}, #{verifycode,jdbcType=INTEGER}
       #{updateTime,jdbcType=TIMESTAMP}
+=======
+    insert into job_seeker (job_seeker_id, username, password,
+      email, role, reg_time
+      )
+    values (#{jobSeekerId,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+      #{email,jdbcType=VARCHAR}, #{role,jdbcType=CHAR}, #{regTime,jdbcType=TIMESTAMP}
+>>>>>>> origin/shuwang
       )
   </insert>
   <insert id="insertSelective" parameterType="com.cjrjob.pojo.Seeker" >
