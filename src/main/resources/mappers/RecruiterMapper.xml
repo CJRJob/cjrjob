@@ -18,11 +18,16 @@
     location
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+<<<<<<< HEAD
     select
+=======
+    select 
+>>>>>>> 036032e4b6c8e224389e7c9180f50044bb6f83a8
     <include refid="Base_Column_List" />
     from job_recruiter
     where job_recruiter_id = #{jobRecruiterId,jdbcType=INTEGER}
   </select>
+<<<<<<< HEAD
 
 
   <select id="selectByPage" resultMap="BaseResultMap" parameterType="java.util.Map" >
@@ -39,6 +44,8 @@
   </select>
 
 
+=======
+>>>>>>> 036032e4b6c8e224389e7c9180f50044bb6f83a8
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from job_recruiter
     where job_recruiter_id = #{jobRecruiterId,jdbcType=INTEGER}
@@ -56,6 +63,12 @@
   <insert id="insertSelective" parameterType="com.cjrjob.pojo.Recruiter" >
     insert into job_recruiter
     <trim prefix="(" suffix=")" suffixOverrides="," >
+<<<<<<< HEAD
+=======
+      <if test="jobRecruiterId != null" >
+        job_recruiter_id,
+      </if>
+>>>>>>> 036032e4b6c8e224389e7c9180f50044bb6f83a8
       <if test="jobRecruiterName != null" >
         job_recruiter_name,
       </if>
@@ -79,6 +92,12 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
+<<<<<<< HEAD
+=======
+      <if test="jobRecruiterId != null" >
+        #{jobRecruiterId,jdbcType=INTEGER},
+      </if>
+>>>>>>> 036032e4b6c8e224389e7c9180f50044bb6f83a8
       <if test="jobRecruiterName != null" >
         #{jobRecruiterName,jdbcType=VARCHAR},
       </if>
@@ -140,5 +159,8 @@
       location = #{location,jdbcType=VARCHAR}
     where job_recruiter_id = #{jobRecruiterId,jdbcType=INTEGER}
   </update>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 036032e4b6c8e224389e7c9180f50044bb6f83a8
 </mapper>

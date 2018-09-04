@@ -1,8 +1,12 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> 036032e4b6c8e224389e7c9180f50044bb6f83a8
 package com.cjrjob.dao;
 
 import com.cjrjob.pojo.Recruiter;
 
+<<<<<<< HEAD
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +32,9 @@ public interface RecruiterMapper {
 
     int updateByPrimaryKey(Recruiter record);
 
+=======
+public interface RecruiterMapper {
+>>>>>>> 036032e4b6c8e224389e7c9180f50044bb6f83a8
     int deleteByPrimaryKey(Integer jobRecruiterId);
 
     int insert(Recruiter record);
@@ -39,5 +46,8 @@ public interface RecruiterMapper {
     int updateByPrimaryKeySelective(Recruiter record);
 
     int updateByPrimaryKey(Recruiter record);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 036032e4b6c8e224389e7c9180f50044bb6f83a8
 }

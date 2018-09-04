@@ -24,13 +24,11 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/user/")
 public class UserController {
 
-<<<<<<< HEAD
     @Autowired
     private IUserService iUserService;
 
     // 登录
     @RequestMapping(value = "login.do", method = RequestMethod.POST)
-=======
     @Autowired(required=true)
     private IUserService iUserService;
 
@@ -63,11 +61,7 @@ public class UserController {
         return ServerResponse.createBySuccess();
     }
 
-<<<<<<< HEAD
-    @RequestMapping("get_seeker_info.do")
-=======
-    @RequestMapping("get_seeker_info")
->>>>>>> 739e7bd12d5340eaef71e9ac7584fa6e1004e194
+
     @ResponseBody
     // 获取用户登录信息
     public ServerResponse getSeekerInfo(HttpSession session){

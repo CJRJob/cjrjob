@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.cjrjob.dao.PublicInfoMapper" >
@@ -112,4 +113,120 @@
       url = #{url,jdbcType=VARCHAR}
     where public_info_id = #{publicInfoId,jdbcType=INTEGER}
   </update>
+=======
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cjrjob.dao.PublicInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.cjrjob.pojo.PublicInfo" >
+    <constructor >
+      <idArg column="public_info_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="kind" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="url" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.cjrjob.pojo.PublicInfo" >
+    <constructor >
+      <idArg column="public_info_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="kind" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="url" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="content" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    public_info_id, kind, name, url
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from public_info
+    where public_info_id = #{publicInfoId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from public_info
+    where public_info_id = #{publicInfoId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cjrjob.pojo.PublicInfo" >
+    insert into public_info (public_info_id, kind, name, 
+      url, content)
+    values (#{publicInfoId,jdbcType=INTEGER}, #{kind,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{url,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cjrjob.pojo.PublicInfo" >
+    insert into public_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="publicInfoId != null" >
+        public_info_id,
+      </if>
+      <if test="kind != null" >
+        kind,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="publicInfoId != null" >
+        #{publicInfoId,jdbcType=INTEGER},
+      </if>
+      <if test="kind != null" >
+        #{kind,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cjrjob.pojo.PublicInfo" >
+    update public_info
+    <set >
+      <if test="kind != null" >
+        kind = #{kind,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where public_info_id = #{publicInfoId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.cjrjob.pojo.PublicInfo" >
+    update public_info
+    set kind = #{kind,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where public_info_id = #{publicInfoId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cjrjob.pojo.PublicInfo" >
+    update public_info
+    set kind = #{kind,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR}
+    where public_info_id = #{publicInfoId,jdbcType=INTEGER}
+  </update>
+>>>>>>> 036032e4b6c8e224389e7c9180f50044bb6f83a8
 </mapper>

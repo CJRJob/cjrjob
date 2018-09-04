@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.cjrjob.dao.DeliveryMapper" >
@@ -104,4 +105,89 @@
       job_full_info = #{jobFullInfo,jdbcType=INTEGER}
     where job_delivery_id = #{jobDeliveryId,jdbcType=INTEGER}
   </update>
+=======
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cjrjob.dao.DeliveryMapper" >
+  <resultMap id="BaseResultMap" type="com.cjrjob.pojo.Delivery" >
+    <constructor >
+      <idArg column="job_delivery_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="job_seeker_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="job_full_info" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    job_delivery_id, create_time, job_seeker_id, job_full_info
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from job_delivery
+    where job_delivery_id = #{jobDeliveryId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from job_delivery
+    where job_delivery_id = #{jobDeliveryId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cjrjob.pojo.Delivery" >
+    insert into job_delivery (job_delivery_id, create_time, job_seeker_id, 
+      job_full_info)
+    values (#{jobDeliveryId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{jobSeekerId,jdbcType=INTEGER}, 
+      #{jobFullInfo,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cjrjob.pojo.Delivery" >
+    insert into job_delivery
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="jobDeliveryId != null" >
+        job_delivery_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="jobSeekerId != null" >
+        job_seeker_id,
+      </if>
+      <if test="jobFullInfo != null" >
+        job_full_info,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="jobDeliveryId != null" >
+        #{jobDeliveryId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jobSeekerId != null" >
+        #{jobSeekerId,jdbcType=INTEGER},
+      </if>
+      <if test="jobFullInfo != null" >
+        #{jobFullInfo,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cjrjob.pojo.Delivery" >
+    update job_delivery
+    <set >
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jobSeekerId != null" >
+        job_seeker_id = #{jobSeekerId,jdbcType=INTEGER},
+      </if>
+      <if test="jobFullInfo != null" >
+        job_full_info = #{jobFullInfo,jdbcType=INTEGER},
+      </if>
+    </set>
+    where job_delivery_id = #{jobDeliveryId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cjrjob.pojo.Delivery" >
+    update job_delivery
+    set create_time = #{createTime,jdbcType=TIMESTAMP},
+      job_seeker_id = #{jobSeekerId,jdbcType=INTEGER},
+      job_full_info = #{jobFullInfo,jdbcType=INTEGER}
+    where job_delivery_id = #{jobDeliveryId,jdbcType=INTEGER}
+  </update>
+>>>>>>> 036032e4b6c8e224389e7c9180f50044bb6f83a8
 </mapper>
