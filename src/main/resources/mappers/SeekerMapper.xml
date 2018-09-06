@@ -15,7 +15,7 @@
   </resultMap>
 
   <sql id="Base_Column_List" >
-    job_seeker_id, username, password, email, role, reg_time, verifyCode, update_time
+    job_seeker_id, username, password, email, role, reg_time,verify_code, YN
   </sql>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -63,12 +63,6 @@
       <if test="yn != null" >
         YN,
       </if>
-      <if test="verifycode != null">
-        verifyCode,
-      </if>
-      <if test="updateTime != null" >
-        update_time,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="jobSeekerId != null" >
@@ -94,12 +88,6 @@
       </if>
       <if test="yn != null" >
         #{yn,jdbcType=TINYINT},
-      </if>
-      <if test="verifycode != null">
-        #{verifycode,jdbcType=INTEGER},
-      </if>
-      <if test="updateTime != null" >
-        #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -127,10 +115,6 @@
       <if test="yn != null" >
         YN = #{yn,jdbcType=TINYINT},
       </if>
-
-      <if test="updateTime != null" >
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
     </set>
     where job_seeker_id = #{jobSeekerId,jdbcType=INTEGER}
   </update>
@@ -143,8 +127,6 @@
       reg_time = #{regTime,jdbcType=TIMESTAMP},
       verify_code = #{verifyCode,jdbcType=INTEGER},
       YN = #{yn,jdbcType=TINYINT}
-      verifyCode = #{verifycode,jdbcType=INTEGER},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
     where job_seeker_id = #{jobSeekerId,jdbcType=INTEGER}
   </update>
 

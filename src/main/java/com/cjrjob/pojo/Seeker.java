@@ -14,8 +14,6 @@ public class Seeker {
 
     private String email;
 
-    private Integer verifycode;
-
     private String role;
 
     private Date regTime;
@@ -27,12 +25,11 @@ public class Seeker {
     public Seeker() {
     }
 
-    public Seeker(Integer jobSeekerId, String username, String password, String email, Integer verifycode, String role, Date regTime, Integer verifyCode, Byte yn) {
+    public Seeker(Integer jobSeekerId, String username, String password, String email,String role, Date regTime, Integer verifyCode, Byte yn) {
         this.jobSeekerId = jobSeekerId;
         this.username = username;
         this.password = password;
         this.email = email;
-        this.verifycode = verifycode;
         this.role = role;
         this.regTime = regTime;
         this.verifyCode = verifyCode;
@@ -69,14 +66,6 @@ public class Seeker {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Integer getVerifycode() {
-        return verifycode;
-    }
-
-    public void setVerifycode(Integer verifycode) {
-        this.verifycode = verifycode;
     }
 
     public String getRole() {

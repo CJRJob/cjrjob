@@ -11,6 +11,7 @@ import com.cjrjob.service.IUserService;
 import com.cjrjob.util.MD5Util;
 import org.apache.commons.lang3.StringUtils;
 
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -68,6 +69,7 @@ public class UserServiceImpl implements IUserService {
         seeker.setUsername(seeker.getEmail());
         seeker.setPassword(MD5Util.MD5EncodeUtf8(seeker.getPassword()));
         seeker.setRole(Const.Role.ROLE_SEEKER.getValue());
+        seeker.setRegTime(new DateTime().toDate());
 
         int result = seekerMapper.insert(seeker);
         if (result == 0){
@@ -98,7 +100,7 @@ public class UserServiceImpl implements IUserService {
         MimeMessage mMessage=javaMailSender.createMimeMessage();//创建邮件对象
         Properties prop = new Properties();
 
-        int code = new Random().nextInt(1000000);
+        int code = new Random().nextInt(1000000); // 生成随机验证码
         try {
             //从配置文件中拿到发件人邮箱地址
             prop.load(this.getClass().getResourceAsStream("/cjrjob.properties"));
@@ -124,7 +126,7 @@ public class UserServiceImpl implements IUserService {
             updateSeeker.setRegTime(seeker.getRegTime());
             updateSeeker.setRole(seeker.getRole());
             updateSeeker.setPassword(seeker.getPassword());
-            updateSeeker.setVerifycode(code);
+            updateSeeker.setVerifyCode( code);
             int updateCount = seekerMapper.updateByPrimaryKeySelective(updateSeeker);
             if (updateCount == 0){
                 return ServerResponse.createByErrorMessage("验证码更新失败");

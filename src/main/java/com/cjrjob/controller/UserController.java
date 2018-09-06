@@ -56,7 +56,7 @@ public class UserController {
         return ServerResponse.createBySuccess();
     }
 
-
+    @RequestMapping("seeker_reg_detail.do")
     @ResponseBody
     // 获取用户登录信息
     public ServerResponse getSeekerInfo(HttpSession session){
