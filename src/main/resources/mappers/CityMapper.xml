@@ -10,6 +10,17 @@
   <sql id="Base_Column_List" >
     job_city_id, job_city_name
   </sql>
+  <select id="selectByJobFullInfoId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List"/>
+
+    from job_city
+
+    where job_city_id=
+
+    (select job_city_id from job_full_info
+    where job_full_info_id=#{job_full_info_id})
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

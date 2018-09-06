@@ -14,4 +14,5 @@ public interface RecruiterMapper {
     int updateByPrimaryKeySelective(Recruiter record);
 
     int updateByPrimaryKey(Recruiter record);
+    Recruiter selectRecuByjob_full_info_id(Integer job_full_info_id);
 }

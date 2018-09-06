@@ -35,7 +35,7 @@
       <arg column="job_kind_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="job_city_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="job_recruiter_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="job_content" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="job_content" jdbcType="VARCHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >

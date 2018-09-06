@@ -2,6 +2,8 @@ package com.cjrjob.dao;
 
 import com.cjrjob.pojo.JobFullInfo;
 
+import java.util.List;
+
 public interface JobFullInfoMapper {
     int deleteByPrimaryKey(Integer jobFullInfoId);
 
@@ -16,4 +18,6 @@ public interface JobFullInfoMapper {
     int updateByPrimaryKeyWithBLOBs(JobFullInfo record);
 
     int updateByPrimaryKey(JobFullInfo record);
+
+
 }

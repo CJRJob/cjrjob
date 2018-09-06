@@ -10,6 +10,15 @@
   <sql id="Base_Column_List" >
     job_kind_id, job_kind_name
   </sql>
+  <select id="selectkind" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List"/>
+
+    from job_kind where job_kind_id=
+
+    (select job_kind_id from job_full_info
+    where job_full_info_id=#{job_full_info_id})
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
