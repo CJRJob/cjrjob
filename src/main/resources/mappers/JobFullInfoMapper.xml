@@ -14,45 +14,22 @@
       <arg column="demand_age" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="job_location" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="people_num" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="job_content" jdbcType="LONGVARCHAR" javaType="java.lang.String"/>
       <arg column="job_kind_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="job_city_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="job_recruiter_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="YN" jdbcType="TINYINT" javaType="java.lang.Byte" />
     </constructor>
   </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.cjrjob.pojo.JobFullInfo" >
-    <constructor >
-      <idArg column="job_full_info_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="title" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="money" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="welfare" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="demand_education" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="demand_experience" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="demand_gender" jdbcType="CHAR" javaType="java.lang.String" />
-      <arg column="demand_age" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="job_location" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="people_num" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="job_kind_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="job_city_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="job_recruiter_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="YN" jdbcType="TINYINT" javaType="java.lang.Byte" />
-      <arg column="job_content" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
-    </constructor>
-  </resultMap>
+
   <sql id="Base_Column_List" >
     job_full_info_id, title, money, create_time, welfare, demand_education, demand_experience,
-    demand_gender, demand_age, job_location, people_num, job_kind_id, job_city_id, job_recruiter_id, 
+    demand_gender, demand_age, job_location, people_num, job_content, job_kind_id, job_city_id, job_recruiter_id,
     YN
   </sql>
-  <sql id="Blob_Column_List" >
-    job_content
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from job_full_info
     where job_full_info_id = #{jobFullInfoId,jdbcType=INTEGER}
   </select>
@@ -64,15 +41,14 @@
     insert into job_full_info (job_full_info_id, title, money, 
       create_time, welfare, demand_education, 
       demand_experience, demand_gender, demand_age, 
-      job_location, people_num, job_kind_id,
-      job_city_id, job_recruiter_id, YN, 
-      job_content)
+      job_location, people_num, job_content,
+      job_kind_id,job_city_id, job_recruiter_id, YN
+      )
     values (#{jobFullInfoId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{money,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{welfare,jdbcType=VARCHAR}, #{demandEducation,jdbcType=VARCHAR}, 
       #{demandExperience,jdbcType=VARCHAR}, #{demandGender,jdbcType=CHAR}, #{demandAge,jdbcType=VARCHAR}, 
-      #{jobLocation,jdbcType=VARCHAR}, #{peopleNum,jdbcType=VARCHAR}, #{jobKindId,jdbcType=INTEGER},
-      #{jobCityId,jdbcType=INTEGER}, #{jobRecruiterId,jdbcType=INTEGER}, #{yn,jdbcType=TINYINT}, 
-      #{jobContent,jdbcType=LONGVARCHAR})
+      #{jobLocation,jdbcType=VARCHAR}, #{peopleNum,jdbcType=VARCHAR},#{jobContent,jdbcType=LONGVARCHAR},
+      #{jobKindId,jdbcType=INTEGER},#{jobCityId,jdbcType=INTEGER}, #{jobRecruiterId,jdbcType=INTEGER}, #{yn,jdbcType=TINYINT})
   </insert>
   <insert id="insertSelective" parameterType="com.cjrjob.pojo.JobFullInfo" >
     insert into job_full_info
@@ -266,4 +242,11 @@
       job_recruiter_id = #{jobRecruiterId,jdbcType=INTEGER}
     where job_full_info_id = #{jobFullInfoId,jdbcType=INTEGER}
   </update>
+
+  <select id="selectList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from job_full_info
+    order by job_full_info_id asc
+  </select>
 </mapper>

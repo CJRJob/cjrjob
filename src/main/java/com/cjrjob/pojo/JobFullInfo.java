@@ -35,6 +35,8 @@ public class JobFullInfo {
 
     private String peopleNum;
 
+    private String jobContent;
+
     private Integer jobKindId;
 
     private Integer jobCityId;
@@ -43,6 +45,6 @@ public class JobFullInfo {
 
     private Byte yn;
 
-    private String jobContent;
+
 
 }

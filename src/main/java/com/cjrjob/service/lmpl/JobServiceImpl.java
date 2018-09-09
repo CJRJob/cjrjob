@@ -15,6 +15,7 @@ import com.cjrjob.vo.JobDetailVo;
 import com.cjrjob.vo.ListJobVo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,12 +44,18 @@ public class JobServiceImpl implements IJobService {
     @Override
     public ServerResponse<PageInfo> getList(Integer pageNumber, Integer pageSize) {
         PageHelper.startPage(pageNumber, pageSize);
+        // 获取职位列表
+        List<JobFullInfo> jobFullInfoList = jobFullInfoMapper.selectList();
+        List<ListJobVo> jobVoList = Lists.newArrayList();
 
-//        List<ListJobVo> orderVoList = unionAllMessage(orderList, userId);
-//        PageInfo pageResult = new PageInfo(orderList);
-//        pageResult.setList(orderVoList);
+        for (JobFullInfo jobItem : jobFullInfoList) {
+            ListJobVo listJobVo = unionAllMessage(jobItem); // 组装JobVo
+            jobVoList.add(listJobVo);
+        }
+        PageInfo pageResult = new PageInfo(jobFullInfoList);
+        pageResult.setList(jobVoList);
+        return ServerResponse.createBySuccess(pageResult);
 
-        return null;
     }
 
 
@@ -108,18 +115,21 @@ public class JobServiceImpl implements IJobService {
     /**
      * 组装三张表的信息
      */
-    public ListJobVo unionAllMessage(JobFullInfo j, City c, Recruiter r) {
+    public ListJobVo unionAllMessage(JobFullInfo jobFullInfo) {
+
+        City city = cityMapper.selectByJobFullInfoId(jobFullInfo.getJobCityId());
+        Recruiter recruiter = recruiterMapper.selectRecuByjob_full_info_id(jobFullInfo.getJobRecruiterId());
         ListJobVo vo = new ListJobVo();
-        vo.setId(j.getJobFullInfoId());
-        vo.setTitle(j.getTitle());
-        vo.setMoney(j.getMoney());
-        vo.setCreate_time(DateTimeUtil.dateToString(j.getCreateTime()));
-        vo.setWelfare(j.getWelfare());
+        vo.setId(jobFullInfo.getJobFullInfoId());
+        vo.setTitle(jobFullInfo.getTitle());
+        vo.setMoney(jobFullInfo.getMoney());
+        vo.setCreate_time(DateTimeUtil.dateToString(jobFullInfo.getCreateTime()));
+        vo.setWelfare(jobFullInfo.getWelfare());
         /**封装city表*/
-        vo.setJobCityName(c.getJobCityName());
+        vo.setJobCityName(city.getJobCityName());
         /**封装招聘表*/
-        vo.setJobRecruiterName(r.getJobRecruiterName());
-        vo.setDemandExperience(j.getDemandExperience());
+        vo.setJobRecruiterName(recruiter.getJobRecruiterName());
+        vo.setDemandExperience(jobFullInfo.getDemandExperience());
         return vo;
 
     }
