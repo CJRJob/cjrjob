@@ -136,4 +136,11 @@
     from feedback_info
     where job_seeker_id = #{jobSeekerId,jdbcType=INTEGER}
   </select>
+
+  <insert id="insertByVo" parameterType="com.cjrjob.vo.FeedbackVo">
+  	INSERT INTO feedback_info
+  	(feedback_kind, feedback_content, contact, job_seeker_id)
+  	VALUES(
+  	#{feedbackKind}, #{feedbackContent}, #{contact}, #{userId})
+</insert>
 </mapper>

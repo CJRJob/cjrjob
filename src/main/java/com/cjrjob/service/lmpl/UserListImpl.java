@@ -1,4 +1,4 @@
-package com.cjrjob.serviceimpl;
+package com.cjrjob.service.lmpl;
 
 import java.util.HashMap;
 import java.util.Map;
