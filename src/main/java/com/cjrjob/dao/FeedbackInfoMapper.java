@@ -1,6 +1,7 @@
 package com.cjrjob.dao;
 
 import com.cjrjob.pojo.FeedbackInfo;
+import com.cjrjob.vo.FeedbackVo;
 
 public interface FeedbackInfoMapper {
     int deleteByPrimaryKey(Integer feedbackInfoId);
@@ -16,4 +17,6 @@ public interface FeedbackInfoMapper {
     int updateByPrimaryKeyWithBLOBs(FeedbackInfo record);
 
     int updateByPrimaryKey(FeedbackInfo record);
+
+    void insertByVo(FeedbackVo feedbackVo);
 }

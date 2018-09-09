@@ -92,4 +92,12 @@
       YN = #{yn,jdbcType=TINYINT}
     where job_delivery_id = #{jobDeliveryId,jdbcType=INTEGER}
   </update>
+  <select id="findBy" parameterType="int" resultType="hashmap">
+  	SELECT d.job_delivery_id id, UNIX_TIMESTAMP(d.create_time)
+  	create_time,j.title,r.job_recruiter_name jobRecruiterName
+  	from job_delivery d
+  	join job_full_info j on j.job_full_info_id = d.job_full_info
+  	join job_recruiter r on r.job_recruiter_id = j.job_recruiter_id
+  	where d.job_seeker_id = #{jobSeekerId} and d.YN = 0
+  </select>
 </mapper>
