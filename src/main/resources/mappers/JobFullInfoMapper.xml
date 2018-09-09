@@ -44,9 +44,6 @@
     job_full_info_id, title, money, create_time, welfare, demand_education, demand_experience,
     demand_gender, demand_age, job_location, people_num, job_kind_id, job_city_id, job_recruiter_id, 
     YN
-=======
-    demand_gender, demand_age, job_location, people_num, job_kind_id, job_city_id, job_recruiter_id
->>>>>>> 739e7bd12d5340eaef71e9ac7584fa6e1004e194
   </sql>
   <sql id="Blob_Column_List" >
     job_content
@@ -70,16 +67,12 @@
       job_location, people_num, job_kind_id,
       job_city_id, job_recruiter_id, YN, 
       job_content)
-      job_city_id, job_recruiter_id, job_content
-      )
     values (#{jobFullInfoId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{money,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{welfare,jdbcType=VARCHAR}, #{demandEducation,jdbcType=VARCHAR}, 
       #{demandExperience,jdbcType=VARCHAR}, #{demandGender,jdbcType=CHAR}, #{demandAge,jdbcType=VARCHAR}, 
       #{jobLocation,jdbcType=VARCHAR}, #{peopleNum,jdbcType=VARCHAR}, #{jobKindId,jdbcType=INTEGER},
       #{jobCityId,jdbcType=INTEGER}, #{jobRecruiterId,jdbcType=INTEGER}, #{yn,jdbcType=TINYINT}, 
       #{jobContent,jdbcType=LONGVARCHAR})
-      #{jobCityId,jdbcType=INTEGER}, #{jobRecruiterId,jdbcType=INTEGER}, #{jobContent,jdbcType=LONGVARCHAR}
-      )
   </insert>
   <insert id="insertSelective" parameterType="com.cjrjob.pojo.JobFullInfo" >
     insert into job_full_info

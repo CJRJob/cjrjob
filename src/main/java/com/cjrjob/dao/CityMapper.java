@@ -15,4 +15,7 @@ public interface CityMapper {
     int updateByPrimaryKeySelective(City record);
 
     int updateByPrimaryKey(City record);
+
+    City selectByJobFullInfoId(Integer job_full_info_id);
+
 }

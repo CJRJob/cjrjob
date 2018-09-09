@@ -23,7 +23,8 @@ public class FeedBackController {
     @Autowired
     private IFeedBackService feedBackService;
 
-    @RequestMapping(value = "/feedback", method = RequestMethod.GET)
+    // 查询反馈信息
+    @RequestMapping(value = "/feedback.do", method = RequestMethod.GET)
     public ServerResponse<FeedbackInfo>  selectByUserId(Integer jobSeekerId, HttpSession session) {
         //判断用户是否登录
         Seeker currentSeeker = (Seeker) session.getAttribute(Const.CURRENT_USER);

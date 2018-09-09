@@ -57,4 +57,16 @@
     set job_city_name = #{jobCityName,jdbcType=VARCHAR}
     where job_city_id = #{jobCityId,jdbcType=INTEGER}
   </update>
+
+  <select id="selectByJobFullInfoId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List"/>
+
+    from job_city
+
+    where job_city_id=
+
+    (select job_city_id from job_full_info
+    where job_full_info_id=#{job_full_info_id})
+  </select>
 </mapper>

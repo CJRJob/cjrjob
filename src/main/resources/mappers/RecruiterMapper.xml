@@ -140,4 +140,11 @@
     where job_recruiter_id = #{jobRecruiterId,jdbcType=INTEGER}
   </update>
 
+  <select id="selectRecuByjob_full_info_id" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List"/>
+    from job_recruiter where job_recruiter_id=
+    (select job_recruiter_id from job_full_info
+    where job_full_info_id= #{job_full_info_id})
+  </select>
 </mapper>

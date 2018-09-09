@@ -16,4 +16,6 @@ public interface JobKindMapper {
 
     int updateByPrimaryKey(JobKind record);
 
+    JobKind selectkind(Integer job_full_info_id);
+
 }
