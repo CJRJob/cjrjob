@@ -210,16 +210,19 @@ public class UserServiceImpl implements IUserService {
     }
 
     // 查找用户详细信息
-    public ServerResponse<SeekerInfo> seekerInfoDetail(String email){
+    public ServerResponse<SeekerInfo> seekerInfoDetail(Integer jobSeekerId){
         // 根据邮箱 查询用户的详细个人信息
-        SeekerInfo seekerInfo = seekerInfoMapper.findSeekerByEmail(email);
+        SeekerInfo seekerInfo = seekerInfoMapper.selectByPrimaryKey(jobSeekerId);
+        if (seekerInfo == null) {
+            return ServerResponse.createByErrorMessage("用户信息为空");
+        }
         return ServerResponse.createBySuccess(seekerInfo);
     }
 
     //更新个人信息
     public ServerResponse<SeekerInfo> updateInformation(SeekerInfo seekerInfo){
 
-        SeekerInfo seekerInfoDetail = this.seekInfoDetail(seekerInfo.getEmail()).getData();
+        SeekerInfo seekerInfoDetail = this.seekerInfoDetail(seekerInfo.getJobSeekerId()).getData();
 
         SeekerInfo updateSeeker = new SeekerInfo();
         updateSeeker.setJobSeekerInfoId(seekerInfoDetail.getJobSeekerInfoId());
@@ -260,14 +263,14 @@ public class UserServiceImpl implements IUserService {
     }
 
 
-    // 获取个人详细信息
-    public ServerResponse<SeekerInfo> seekInfoDetail(String email){
-        SeekerInfo seekerInfo = seekerInfoMapper.findSeekerByEmail(email);
-        if (seekerInfo == null) {
-            return ServerResponse.createByErrorMessage("用户信息为空");
-        }
-        return ServerResponse.createBySuccess(seekerInfo);
-
-    }
+//    // 获取个人详细信息
+//    public ServerResponse<SeekerInfo> seekInfoDetail(Integer jobSeekerId){
+//        SeekerInfo seekerInfo = seekerInfoMapper.findSeekerByEmail(jobSeekerId);
+//        if (seekerInfo == null) {
+//            return ServerResponse.createByErrorMessage("用户信息为空");
+//        }
+//        return ServerResponse.createBySuccess(seekerInfo);
+//
+//    }
     }
 

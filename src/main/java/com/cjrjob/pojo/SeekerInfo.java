@@ -13,6 +13,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SeekerInfo {
+
     private Integer jobSeekerInfoId;
 
     private String name;

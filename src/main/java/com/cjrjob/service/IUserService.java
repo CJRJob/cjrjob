@@ -26,5 +26,5 @@ public interface IUserService {
 
     ServerResponse<SeekerInfo> updateInformation(SeekerInfo seekerInfo);
 
-    ServerResponse<SeekerInfo> seekInfoDetail(String email);
+    ServerResponse<SeekerInfo> seekerInfoDetail(Integer jobSeekerId);
 }

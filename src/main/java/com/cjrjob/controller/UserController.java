@@ -29,7 +29,7 @@ public class UserController {
 
 
     // 登录
-    @RequestMapping(value = "login", method = RequestMethod.POST)
+    @RequestMapping(value = "login", method = RequestMethod.GET)
     @ResponseBody
     public ServerResponse<Seeker> login(String email, String password, HttpSession session){
 
@@ -48,7 +48,7 @@ public class UserController {
         return iUserService.register(seeker);
     }
 
-    @RequestMapping(value = "logout.do", method = RequestMethod.POST)
+    @RequestMapping(value = "logout.do", method = RequestMethod.GET)
     @ResponseBody
     // 登出接口
     public ServerResponse<String> logout(HttpSession session){
@@ -90,7 +90,7 @@ public class UserController {
         return iUserService.forgetRestPassword(email, passwordNew, forgetToken);
     }
 
-    @RequestMapping(value = "rest_password.do", method = RequestMethod.POST)
+    @RequestMapping(value = "rest_password.do", method = RequestMethod.GET)
     @ResponseBody
     // 登录状态的重置密码
     public ServerResponse<String> restPasswprd(HttpSession session, String passwordOld, String passwordNew){
@@ -125,6 +125,6 @@ public class UserController {
         if (currentUser == null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "未登陆, 需要强制登陆");
         }
-        return iUserService.seekInfoDetail(currentUser.getEmail());
+        return iUserService.seekerInfoDetail(currentUser.getJobSeekerId());
     }
 }

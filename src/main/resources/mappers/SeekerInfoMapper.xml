@@ -35,7 +35,6 @@
       <arg column="head_img_URI" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="resume_document_URI" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="YN" jdbcType="TINYINT" javaType="java.lang.Byte" />
-
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
@@ -44,7 +43,6 @@
     nation, marriage, household, graduation_time, QQ, expect_industry, seeker_job, start_time, 
     height, political, IDnumber, family_phone, address, job_seeker_id, head_img_URI,
     resume_document_URI, YN
-    resume_document_URI
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -68,7 +66,6 @@
       political, IDnumber, family_phone, 
       address, job_seeker_id, head_img_URI,
       resume_document_URI, YN)
-      resume_document_URI)
     values (#{jobSeekerInfoId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, 
       #{highestEducation,jdbcType=VARCHAR}, #{hopeJob,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
       #{disabilityKind,jdbcType=VARCHAR}, #{gender,jdbcType=CHAR}, #{location,jdbcType=VARCHAR}, 
@@ -80,7 +77,6 @@
       #{political,jdbcType=VARCHAR}, #{idnumber,jdbcType=VARCHAR}, #{familyPhone,jdbcType=VARCHAR}, 
       #{address,jdbcType=VARCHAR}, #{jobSeekerId,jdbcType=INTEGER}, #{headImgUri,jdbcType=VARCHAR},
       #{resumeDocumentUri,jdbcType=VARCHAR}, #{yn,jdbcType=TINYINT})
-      #{resumeDocumentUri,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.cjrjob.pojo.SeekerInfo" >
     insert into job_seeker_info
@@ -414,7 +410,6 @@
       head_img_URI = #{headImgUri,jdbcType=VARCHAR},
       resume_document_URI = #{resumeDocumentUri,jdbcType=VARCHAR},
       YN = #{yn,jdbcType=TINYINT}
-      resume_document_URI = #{resumeDocumentUri,jdbcType=VARCHAR}
     where job_seeker_info_id = #{jobSeekerInfoId,jdbcType=INTEGER}
   </update>
 
